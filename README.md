@@ -1,1 +1,1 @@
-# aigc-backend
+# AIGC backend
