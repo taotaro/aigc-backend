@@ -212,8 +212,11 @@ class BaseViewModel:
             part = MIMEText(body, "html")
             message.attach(part)
 
-            context = ssl.create_default_context()
-            context.set_ciphers('DEFAULT')
+            # context = ssl.create_default_context()
+            # context.set_ciphers('DEFAULT')
+
+            # remove ssl verification
+            context = ssl._create_unverified_context()
 
             with SMTP_SSL(settings.MAIL_HOST, settings.MAIL_PORT, context=context) as server:
                 server.login(settings.MAIL_USERNAME, settings.MAIL_PASSWORD)
