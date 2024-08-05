@@ -61,8 +61,6 @@ class RegistrationViewModel(BaseViewModel):
         ).insert()
 
         email_body = f"""
-            Dear Team,
-
             You have successfully registered a team under {self.form_data.email}
             with the name {self.form_data.team_name}.
 
@@ -77,7 +75,6 @@ class RegistrationViewModel(BaseViewModel):
                 Gender: {member['gender']}
                 Grade: {member['grade']}
                 """
-
 
         self.send_email(
             get_settings().MAIL_USERNAME,
