@@ -13,11 +13,19 @@ __all__ = (
     'TeamModel',
     'GenderEnum',
     'StudentModel',
+    'TitleEnum',
 )
 
 class GenderEnum(Enum):
-    male = 'male'
-    female = 'female'
+    Male = 'Male'
+    Female = 'Female'
+
+class TitleEnum(Enum):
+    Mr = 'Mr.'
+    Mrs = 'Mrs.'
+    Miss = 'Miss.'
+    Dr = 'Dr.'
+    Prof = 'Prof.'
 
 
 class TeacherModel(BaseDBModel):
@@ -25,12 +33,15 @@ class TeacherModel(BaseDBModel):
     email: Annotated[str, Indexed(EmailStr, unique=True)] = Field(...)
     name_english: str = Field(...)
     name_chinese: str = Field(...)
+    title: TitleEnum = Field(...)
     school_name_chinese: str = Field(...)
     school_name_english: str = Field(...)
     school_address_chinese: str = Field(...)
     school_address_english: str = Field(...)
-    mobile_phone: Optional[str] = Field(None)
-    telephone: Optional[str] = Field(None)
+    mobile_phone: str = Field(...)
+    telephone: str = Field(...)
+    teams: List[dict] = Field([])
+    
 
     class Settings:
         name = 'teachers'
@@ -59,6 +70,8 @@ class StudentModel(BaseDBModel):
     year_of_birth: int = Field(...)
     gender: GenderEnum = Field(...)
     grade: int = Field(...)
+    mobile_phone: Optional[str] = Field(None)
+    email: Optional[str] = Field(None)
     teacher_email: Annotated[str, Indexed(EmailStr)] = Field(...)
 
     class Settings:

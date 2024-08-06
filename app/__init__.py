@@ -32,14 +32,15 @@ def create_app():
     async def on_startup():
         print("Starting up")
         await init_db(mongo_client)
-    # app.add_middleware(
-    #     CORSMiddleware,
-    #     allow_credentials=True,
-    #     allow_methods=["*"],
-    #     allow_headers=["*"],
-    #     expose_headers=["*"],
-    # )
-    # print("Startup complete")
+    app.add_middleware(
+        CORSMiddleware,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+        expose_headers=["*"],
+        allow_origins=["*"],
+    )
+    print("Startup complete")
     return app
 
 

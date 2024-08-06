@@ -10,18 +10,23 @@
       <h1>Team Registration Successful</h1>
       <p>
         You have successfully registered a team under
-        <strong>{{data.email}}</strong> with the name
-        <strong>{{data.team_name}}</strong>.
+        <strong>{{data.email}}</strong>
       </p>
       <p>The members of the team are as follows:</p>
       <ul>
-        {% for member in data.members %}
+        {% for team in data.info %}
         <li>
-          <strong>Name (in Chinese):</strong>{{member.name_chinese}}<br />
-          <strong>Name (in English):</strong>{{member.name_english}}<br />
-          <strong>Year of Birth:</strong>{{member.year_of_birth}}<br />
-          <strong>Gender:</strong>{{member.gender}}<br />
-          <strong>Grade:</strong>{{member.grade}}
+          <strong>Team Name:</strong>{{team.team_name}}<br />
+          <strong>Team Members:</strong><br />
+          {% for member in team.team_members %}
+          <li>
+            <strong>Name (in Chinese):</strong>{{member.name_chinese}}<br />
+            <strong>Name (in English):</strong>{{member.name_english}}<br />
+            <strong>Year of Birth:</strong>{{member.year_of_birth}}<br />
+            <strong>Gender:</strong>{{member.gender}}<br />
+            <strong>Grade:</strong>{{member.grade}} {% endfor %}<br/>
+          </li>
+          
         </li>
         {% endfor %}
       </ul>
