@@ -13,3 +13,7 @@ router = APIRouter(
 @router.get("/")
 async def test_api():
     return 'API is working'
+
+@router.get("/test")
+async def test_api_for_deployment():
+    return 'API is working (test)'
