@@ -33,7 +33,7 @@ class TeacherModel(BaseDBModel):
     email: Annotated[str, Indexed(EmailStr, unique=True)] = Field(...)
     name_english: str = Field(...)
     name_chinese: str = Field(...)
-    # title: TitleEnum = Field(...)
+    title: TitleEnum = Field(...)
     school_name_chinese: str = Field(...)
     school_name_english: str = Field(...)
     school_address_chinese: str = Field(...)

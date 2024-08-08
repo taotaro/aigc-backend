@@ -75,7 +75,7 @@ class RegistrationViewModel(BaseViewModel):
             school_address_chinese=self.form_data.school_address_chinese,
             mobile_phone=self.form_data.mobile_phone,
             telephone=self.form_data.telephone,
-            # title=self.form_data.title,
+            title=self.form_data.title,
             teams=all_team_info
         ).insert()
 
