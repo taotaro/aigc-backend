@@ -25,6 +25,15 @@ __all__ = (
 def create_app():
     
     app = FastAPI()
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+        expose_headers=["*"],
+        
+    )
     register_routers(app)
     mongo_client = initialize_mongodb_client()
     # init_db(mongo_client)
@@ -32,15 +41,7 @@ def create_app():
     async def on_startup():
         print("Starting up")
         await init_db(mongo_client)
-    app.add_middleware(
-        CORSMiddleware,
-        # allow_origins=["*"],
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
-        expose_headers=["*"],
-        
-    )
+    
     print("Startup complete")
     return app
 
