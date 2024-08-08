@@ -34,11 +34,12 @@ def create_app():
         await init_db(mongo_client)
     app.add_middleware(
         CORSMiddleware,
+        allow_origins=["*"],
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
         expose_headers=["*"],
-        allow_origins=["*"],
+        
     )
     print("Startup complete")
     return app
