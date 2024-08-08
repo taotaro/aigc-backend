@@ -31,7 +31,7 @@ def create_app():
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
-        expose_headers=["*"],
+        # expose_headers=["*"],
         
     )
     register_routers(app)
