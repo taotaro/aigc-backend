@@ -82,6 +82,14 @@ class RegistrationViewModel(BaseViewModel):
         email_body = render_template('registration_email.html', {
             # 'team_name': self.form_data.team_name,
             'email': self.form_data.email,
+            'teacher_name_chinese': self.form_data.name_chinese,
+            'teacher_name_english': self.form_data.name_english,
+            'school_name_chinese': self.form_data.school_name_chinese,
+            'school_name_english': self.form_data.school_name_english,
+            'school_address_chinese': self.form_data.school_address_chinese,
+            'school_address_english': self.form_data.school_address_english,
+            'mobile_phone': self.form_data.mobile_phone,
+            'telephone': self.form_data.telephone,
             'info': self.form_data.team_info
         })
 
