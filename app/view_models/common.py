@@ -97,7 +97,7 @@ class RegistrationViewModel(BaseViewModel):
             get_settings().MAIL_USERNAME,
             self.form_data.email,
             email_body,
-            'Registration of team successful'
+            '雲遊通義 – 阿里雲香港AI比賽報名完成'
         )
         print('email sent: ', email_status)
 
