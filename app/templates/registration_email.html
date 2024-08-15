@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Team Registration Successful</title>
+    <title>團隊註冊成功</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -23,7 +23,6 @@
       }
       .header {
         text-align: center;
-        /* background-color: #ff6a00; */
         padding: 10px;
       }
       .header img {
@@ -94,71 +93,80 @@
         color: #888;
         text-decoration: none;
       }
+      .sponsors {
+        text-align: center;
+        padding: 20px;
+        margin-top: 30px;
+      }
+      .sponsors img {
+        margin: 10px;
+        height: 50px;
+      }
+      .sponsors h2 {
+        margin-bottom: 10px;
+        font-size: 18px;
+        color: #333;
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <div class="header">
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Alibaba_Cloud_Logo.png"
-          alt="Alibaba Cloud Logo"
-        />
+        <h1>雲遊通義 – 阿里雲香港10週年校際生成式AI比賽</h1>
       </div>
       <img
         src="https://cri-jh0uqm2iyt2q8ku4-registry.oss-cn-hongkong.aliyuncs.com/index-bg.jpeg?Expires=1723745556&OSSAccessKeyId=TMP.3Kkg4q4N2Ep74Pf2oWuq59riyasnKBSQRPJ3aPHczzKKCTiJsR8JPxM9hdeH3ifuWeFWnPX3zLM5FS3AMvcke4nHmnov3X&Signature=d2qIkjVLph02MfQRZErXA8IGFK0%3D"
-        alt="Banner Image"
+        alt="橫幅圖片"
         class="banner"
       />
       <div class="content">
-        <h1>Team Registration Successful</h1>
+        <h1>團隊註冊成功</h1>
         <div class="icon-text-wrapper">
           <div class="icon">
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Android_Email_8.1_Icon.png"
-              alt="email icon"
+              alt="電子郵件圖標"
             />
           </div>
-          <div class="text">
-            You have successfully registered a team under {{data.email}}
-          </div>
+          <div class="text">您已成功註冊一個團隊，電子郵件：{{data.email}}</div>
         </div>
         <div class="icon-text-wrapper">
           <div class="icon">
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/5/51/Breezeicons-categories-32-applications-education-science.svg"
-              alt="teacher icon"
+              alt="教師圖標"
             />
           </div>
           <div class="text">
-            Teacher Name (in Chinese): {{data.teacher_name_chinese}}<br />
-            Teacher Name (in English): {{data.teacher_name_english}}<br />
-            School Name (in Chinese): {{data.school_name_chinese}}<br />
-            School Name (in English): {{data.school_name_english}}<br />
-            School address (in Chinese): {{data.school_address_chinese}}<br />
-            School address (in English): {{data.school_address_english}}
+            教師姓名（中文）：{{data.teacher_name_chinese}}<br />
+            教師姓名（英文）：{{data.teacher_name_english}}<br />
+            學校名稱（中文）：{{data.school_name_chinese}}<br />
+            學校名稱（英文）：{{data.school_name_english}}<br />
+            學校地址（中文）：{{data.school_address_chinese}}<br />
+            學校地址（英文）：{{data.school_address_english}}
           </div>
         </div>
         <div class="icon-text-wrapper">
           <div class="icon">
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Phone_Shiny_Icon.svg"
-              alt="phone icon"
+              alt="電話圖標"
             />
           </div>
           <div class="text">
-            Mobile phone: {{data.mobile_phone}}<br />
-            Telephone: {{data.telephone}}
+            手機號碼：{{data.mobile_phone}}<br />
+            電話號碼：{{data.telephone}}
           </div>
         </div>
         <div class="team-info">
           {% for team in data.info %}
           <table class="team-table">
             <tr>
-              <th colspan="2">Team Name: {{team.team_name}}</th>
+              <th colspan="2">團隊名稱：{{team.team_name}}</th>
             </tr>
             <tr>
-              <th>Name (in Chinese)</th>
-              <th>Name (in English)</th>
+              <th>姓名（中文）</th>
+              <th>姓名（英文）</th>
             </tr>
             {% for member in team.team_members %}
             <tr>
@@ -167,14 +175,48 @@
             </tr>
             <tr>
               <td colspan="2">
-                <strong>Year of Birth:</strong> {{member.year_of_birth}}<br />
-                <strong>Gender:</strong> {{member.gender}}<br />
-                <strong>Grade:</strong> {{member.grade}}
+                <strong>出生年份：</strong> {{member.year_of_birth}}<br />
+                <strong>性別：</strong> {{member.gender}}<br />
+                <strong>年級：</strong> {{member.grade}}
               </td>
             </tr>
             {% endfor %}
           </table>
           {% endfor %}
+        </div>
+        <div class="sponsors">
+          <h2>活動主辦</h2>
+          <img
+            style="width: 200px"
+            src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Alibaba_Cloud_Logo.png"
+            alt="Alibaba Cloud Logo"
+          />
+          <h2>支持單位</h2>
+          <img
+            style="width: 200px"
+            src="https://cri-jh0uqm2iyt2q8ku4-registry.oss-cn-hongkong.aliyuncs.com/gns.png?Expires=1723748713&OSSAccessKeyId=TMP.3Kkg4q4N2Ep74Pf2oWuq59riyasnKBSQRPJ3aPHczzKKCTiJsR8JPxM9hdeH3ifuWeFWnPX3zLM5FS3AMvcke4nHmnov3X&Signature=JIxSlouLJInEDnExwCX1ZgV%2F%2Frw%3D"
+            alt="Supporting Unit 1 Logo"
+          />
+          <img
+            style="width: 200px"
+            src="https://cri-jh0uqm2iyt2q8ku4-registry.oss-cn-hongkong.aliyuncs.com/ml.png?Expires=1723748746&OSSAccessKeyId=TMP.3Kkg4q4N2Ep74Pf2oWuq59riyasnKBSQRPJ3aPHczzKKCTiJsR8JPxM9hdeH3ifuWeFWnPX3zLM5FS3AMvcke4nHmnov3X&Signature=yOygTRd%2B07J%2FKKwABIqzIsdrpn8%3D"
+            alt="Supporting Unit 2 Logo"
+          />
+          <img
+            style="width: 200px"
+            src="https://cri-jh0uqm2iyt2q8ku4-registry.oss-cn-hongkong.aliyuncs.com/hkace.png?Expires=1723748726&OSSAccessKeyId=TMP.3Kkg4q4N2Ep74Pf2oWuq59riyasnKBSQRPJ3aPHczzKKCTiJsR8JPxM9hdeH3ifuWeFWnPX3zLM5FS3AMvcke4nHmnov3X&Signature=EUVMqLOulpq85XnmrKHee0dNGHw%3D"
+            alt="Supporting Unit 3 Logo"
+          />
+          <img
+            style="width: 200px"
+            src="https://cri-jh0uqm2iyt2q8ku4-registry.oss-cn-hongkong.aliyuncs.com/aitle.png?Expires=1723748679&OSSAccessKeyId=TMP.3Kkg4q4N2Ep74Pf2oWuq59riyasnKBSQRPJ3aPHczzKKCTiJsR8JPxM9hdeH3ifuWeFWnPX3zLM5FS3AMvcke4nHmnov3X&Signature=Tx7idgkLgDcGpaLfFCqJMK0RN5M%3D"
+            alt="Supporting Unit 4 Logo"
+          />
+          <img
+            style="width: 200px"
+            src="https://cri-jh0uqm2iyt2q8ku4-registry.oss-cn-hongkong.aliyuncs.com/steelseries.png?Expires=1723748757&OSSAccessKeyId=TMP.3Kkg4q4N2Ep74Pf2oWuq59riyasnKBSQRPJ3aPHczzKKCTiJsR8JPxM9hdeH3ifuWeFWnPX3zLM5FS3AMvcke4nHmnov3X&Signature=179zfQpWvqvJ1beKepkbVY%2FTIhE%3D"
+            alt="Supporting Unit 5 Logo"
+          />
         </div>
       </div>
     </div>
