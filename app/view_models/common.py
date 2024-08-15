@@ -32,52 +32,52 @@ class RegistrationViewModel(BaseViewModel):
 
     async def register(self):
         # print('register')
-        print('data: ', self.form_data)
-        teacher = await TeacherModel.find_one(TeacherModel.email == self.form_data.email)
-        if teacher:
-            self.forbidden('email already registered for another team')
+        # print('data: ', self.form_data)
+        # teacher = await TeacherModel.find_one(TeacherModel.email == self.form_data.email)
+        # if teacher:
+        #     self.forbidden('email already registered for another team')
         
-        all_team_info = []
+        # all_team_info = []
         
-        for team in self.form_data.team_info:
-            team_member_info = []
-            for member in team['team_members']:
-                student_info = await StudentModel(
-                    name_english=member['name_english'],
-                    name_chinese=member['name_chinese'],
-                    year_of_birth=member['year_of_birth'],
-                    gender=member['gender'],
-                    grade=member['grade'],
-                    mobile_phone=member['mobile_phone'],
-                    email=member['email'],
-                    teacher_email=self.form_data.email
-                ).insert()
-                team_member_info.append(student_info)
+        # for team in self.form_data.team_info:
+        #     team_member_info = []
+        #     for member in team['team_members']:
+        #         student_info = await StudentModel(
+        #             name_english=member['name_english'],
+        #             name_chinese=member['name_chinese'],
+        #             year_of_birth=member['year_of_birth'],
+        #             gender=member['gender'],
+        #             grade=member['grade'],
+        #             mobile_phone=member['mobile_phone'],
+        #             email=member['email'],
+        #             teacher_email=self.form_data.email
+        #         ).insert()
+        #         team_member_info.append(student_info)
 
-            team_info = await TeamModel(
-                name=team['team_name'],
-                members=team_member_info,
-                teacher_email=self.form_data.email
-            ).insert()
-            all_team_info.append({
-                'team_name': team['team_name'],
-                'members': team_member_info,
-            })
+        #     team_info = await TeamModel(
+        #         name=team['team_name'],
+        #         members=team_member_info,
+        #         teacher_email=self.form_data.email
+        #     ).insert()
+        #     all_team_info.append({
+        #         'team_name': team['team_name'],
+        #         'members': team_member_info,
+        #     })
 
 
-        teacher_info = await TeacherModel(
-            email=self.form_data.email,
-            name_english=self.form_data.name_english,
-            name_chinese=self.form_data.name_chinese,
-            school_name_english=self.form_data.school_name_english,
-            school_name_chinese=self.form_data.school_name_chinese,
-            school_address_english=self.form_data.school_address_english,
-            school_address_chinese=self.form_data.school_address_chinese,
-            mobile_phone=self.form_data.mobile_phone,
-            telephone=self.form_data.telephone,
-            title=self.form_data.title,
-            teams=all_team_info
-        ).insert()
+        # teacher_info = await TeacherModel(
+        #     email=self.form_data.email,
+        #     name_english=self.form_data.name_english,
+        #     name_chinese=self.form_data.name_chinese,
+        #     school_name_english=self.form_data.school_name_english,
+        #     school_name_chinese=self.form_data.school_name_chinese,
+        #     school_address_english=self.form_data.school_address_english,
+        #     school_address_chinese=self.form_data.school_address_chinese,
+        #     mobile_phone=self.form_data.mobile_phone,
+        #     telephone=self.form_data.telephone,
+        #     title=self.form_data.title,
+        #     teams=all_team_info
+        # ).insert()
 
         email_body = render_template('registration_email.html', {
             # 'team_name': self.form_data.team_name,
@@ -93,14 +93,15 @@ class RegistrationViewModel(BaseViewModel):
             'info': self.form_data.team_info
         })
 
-        self.send_email(
+        email_status = self.send_email(
             get_settings().MAIL_USERNAME,
             self.form_data.email,
             email_body,
             'Registration of team successful'
         )
+        print('email sent: ', email_status)
 
-        self.operating_successfully(dict(teacher_info) | dict(team_info))
+        # self.operating_successfully(dict(teacher_info) | dict(team_info))
 
 
 class AllDataViewModel(BaseViewModel):

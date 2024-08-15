@@ -4,41 +4,179 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Team Registration Successful</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 0;
+        color: #333;
+      }
+      .container {
+        max-width: 600px;
+        margin: 20px auto;
+        background-color: #ffffff;
+        padding: 0;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+      .header {
+        text-align: center;
+        /* background-color: #ff6a00; */
+        padding: 10px;
+      }
+      .header img {
+        width: 100px;
+      }
+      .banner {
+        width: 100%;
+        height: auto;
+      }
+      .content {
+        padding: 20px;
+      }
+      .content h1 {
+        font-size: 24px;
+        color: #ff6a00;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+      .icon-text-wrapper {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 15px;
+      }
+      .icon {
+        flex: 0 0 20px;
+        margin-right: 10px;
+      }
+      .icon img {
+        width: 20px;
+        height: 20px;
+      }
+      .text {
+        flex: 1;
+        color: black;
+      }
+      .content p {
+        margin: 15px 0;
+        color: black;
+      }
+      .team-info {
+        margin: 20px 0;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .team-table {
+        width: 48%;
+        margin: 1%;
+        border-collapse: collapse;
+        background-color: #f9f9f9;
+      }
+      .team-table th,
+      .team-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+      .team-table th {
+        background-color: #ff6a00;
+        color: white;
+        text-align: left;
+      }
+      .footer {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 14px;
+        color: #888;
+      }
+      .footer a {
+        color: #888;
+        text-decoration: none;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
-      <h1>Team Registration Successful</h1>
-      <p>
-        You have successfully registered a team under
-        <strong>{{data.email}}</strong>
-        <strong>Teacher Name (in Chinese):</strong>{{data.teacher_name_chinese}}<br/>
-        <strong>Teacher Name (in English):</strong>{{data.teacher_name_english}}<br/>
-        <strong>School Name (in Chinese):</strong>{{data.school_name_chinese}}<br/>
-        <strong>School Name (in English):</strong>{{data.school_name_chinese}}<br/>
-        <strong>School address (in Chinese):</strong>{{data.school_address_chinese}}<br/>
-        <strong>School address (in English):</strong>{{data.school_address_english}}<br/>
-        <strong>Mobile phone:</strong>{{data.mobile_phone}}<br/>
-        <strong>Telephone:</strong>{{data.telephone}}<br/>
-
-      </p>
-      <p>The members of the team are as follows:</p>
-      <ul>
-        {% for team in data.info %}
-        <li>
-          <strong>Team Name:</strong>{{team.team_name}}<br />
-          <strong>Team Members:</strong><br />
-          {% for member in team.team_members %}
-          <li>
-            <strong>Name (in Chinese):</strong>{{member.name_chinese}}<br />
-            <strong>Name (in English):</strong>{{member.name_english}}<br />
-            <strong>Year of Birth:</strong>{{member.year_of_birth}}<br />
-            <strong>Gender:</strong>{{member.gender}}<br />
-            <strong>Grade:</strong>{{member.grade}} {% endfor %}<br/>
-          </li>
-          
-        </li>
-        {% endfor %}
-      </ul>
+      <div class="header">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Alibaba_Cloud_Logo.png"
+          alt="Alibaba Cloud Logo"
+        />
+      </div>
+      <img
+        src="https://cri-jh0uqm2iyt2q8ku4-registry.oss-cn-hongkong.aliyuncs.com/index-bg.jpeg?Expires=1723712984&OSSAccessKeyId=TMP.3Kkg4q4N2Ep74Pf2oWuq59riyasnKBSQRPJ3aPHczzKKCTiJsR8JPxM9hdeH3ifuWeFWnPX3zLM5FS3AMvcke4nHmnov3X&Signature=rdFdzDhhcYvXJJNlaFdc967lGpg%3D"
+        alt="Banner Image"
+        class="banner"
+      />
+      <div class="content">
+        <h1>Team Registration Successful</h1>
+        <div class="icon-text-wrapper">
+          <div class="icon">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Android_Email_8.1_Icon.png"
+              alt="email icon"
+            />
+          </div>
+          <div class="text">
+            You have successfully registered a team under {{data.email}}
+          </div>
+        </div>
+        <div class="icon-text-wrapper">
+          <div class="icon">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/5/51/Breezeicons-categories-32-applications-education-science.svg"
+              alt="teacher icon"
+            />
+          </div>
+          <div class="text">
+            Teacher Name (in Chinese): {{data.teacher_name_chinese}}<br />
+            Teacher Name (in English): {{data.teacher_name_english}}<br />
+            School Name (in Chinese): {{data.school_name_chinese}}<br />
+            School Name (in English): {{data.school_name_english}}<br />
+            School address (in Chinese): {{data.school_address_chinese}}<br />
+            School address (in English): {{data.school_address_english}}
+          </div>
+        </div>
+        <div class="icon-text-wrapper">
+          <div class="icon">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Phone_Shiny_Icon.svg"
+              alt="phone icon"
+            />
+          </div>
+          <div class="text">
+            Mobile phone: {{data.mobile_phone}}<br />
+            Telephone: {{data.telephone}}
+          </div>
+        </div>
+        <div class="team-info">
+          {% for team in data.info %}
+          <table class="team-table">
+            <tr>
+              <th colspan="2">Team Name: {{team.team_name}}</th>
+            </tr>
+            <tr>
+              <th>Name (in Chinese)</th>
+              <th>Name (in English)</th>
+            </tr>
+            {% for member in team.team_members %}
+            <tr>
+              <td>{{member.name_chinese}}</td>
+              <td>{{member.name_english}}</td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <strong>Year of Birth:</strong> {{member.year_of_birth}}<br />
+                <strong>Gender:</strong> {{member.gender}}<br />
+                <strong>Grade:</strong> {{member.grade}}
+              </td>
+            </tr>
+            {% endfor %}
+          </table>
+          {% endfor %}
+        </div>
+      </div>
     </div>
   </body>
 </html>
