@@ -39,6 +39,12 @@
         font-size: 24px;
         color: #ff6a00;
         font-weight: bold;
+        margin-bottom: 5px;
+      }
+      .content h2 {
+        font-size: 18px;
+        /* color: #ff6a00; */
+        font-weight: bold;
         margin-bottom: 20px;
       }
       .icon-text-wrapper {
@@ -107,6 +113,13 @@
         font-size: 18px;
         color: #333;
       }
+      .section-title {
+        color: #ff6a00;
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 30px;
+        margin-bottom: 20px;
+      }
     </style>
   </head>
   <body>
@@ -120,7 +133,8 @@
         class="banner"
       />
       <div class="content">
-        <h1>團隊註冊成功</h1>
+        <h1>你的參賽申請已被接納</h1>
+        <h2>你提交的參賽資料如下：</h2>
         <div class="icon-text-wrapper">
           <div class="icon">
             <img
@@ -128,7 +142,7 @@
               alt="電子郵件圖標"
             />
           </div>
-          <div class="text">您已成功註冊一個團隊，電子郵件：{{data.email}}</div>
+          <div class="text">電子郵件：{{data.email}}</div>
         </div>
         <div class="icon-text-wrapper">
           <div class="icon">
@@ -184,6 +198,46 @@
           </table>
           {% endfor %}
         </div>
+
+        <!-- 活動查詢及聯絡 -->
+        <div class="section-title">活動查詢及聯絡</div>
+        <div class="content">
+          <p>
+            如有任何活動問題，歡迎聯絡
+            <a
+              href="mailto:edu@gamenoodlesoup.com"
+              style="color: #ff6a00; word-break: break-all"
+            >
+              Gamenoodlesoup
+            </a>
+            (edu@gamenoodlesoup.com / 30011280)
+          </p>
+          <p>
+            參賽者必須同意在參與活動時遵守活動條款及細則，
+            <a
+              href="https://aigc-portal-dev.materia-logic.com/terms"
+              target="_blank"
+              style="color: #ff6a00"
+            >
+              詳情請按此查閱
+            </a>
+            。
+          </p>
+          <p>
+            是次活動所收集的資料只用作活動登記、通訊及相關用途，並只限Alibaba
+            Cloud及其授權之服務承辦商存取。登記者有權要求查閱、更正或刪除其個人資料。如有查詢，與我們聯絡。有關詳情亦可瀏覽
+            <a
+              href="https://www.alibabacloud.com/help/tc/legal/latest/alibaba-cloud-international-website-privacy-policy"
+              target="_blank"
+              style="color: #ff6a00"
+            >
+              Alibaba Cloud的私隱政策
+            </a>
+            。
+          </p>
+        </div>
+        <!-- 結束 -->
+
         <div class="sponsors">
           <h2>活動主辦</h2>
           <img
@@ -194,7 +248,7 @@
           <h2>支持單位</h2>
           <img
             style="width: 200px"
-            src="https://cri-jh0uqm2iyt2q8ku4-registry.oss-cn-hongkong.aliyuncs.com/gns.png?Expires=1723748713&OSSAccessKeyId=TMP.3Kkg4q4N2Ep74Pf2oWuq59riyasnKBSQRPJ3aPHczzKKCTiJsR8JPxM9hdeH3ifuWeFWnPX3zLM5FS3AMvcke4nHmnov3X&Signature=JIxSlouLJInEDnExwCX1ZgV%2F%2Frw%3D"
+            src="https://cri-jh0uqm2iyt2q8ku4-registry.oss-cn-hongkong.aliyuncs.com/gns.png?Expires=1723748765&OSSAccessKeyId=TMP.3Kkg4q4N2Ep74Pf2oWuq59riyasnKBSQRPJ3aPHczzKKCTiJsR8JPxM9hdeH3ifuWeFWnPX3zLM5FS3AMvcke4nHmnov3X&Signature=ouLJInEDnExwCX1ZgV%2F%2Frw%3D"
             alt="Supporting Unit 1 Logo"
           />
           <img
