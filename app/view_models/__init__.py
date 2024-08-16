@@ -202,6 +202,7 @@ class BaseViewModel:
         raise ViewModelRequestException(message=msg)
 
     def send_email(self, sender: str, receiver: str, body: str, subject: str = 'subject') -> bool:
+        
         try:
             settings = get_settings()
             message = MIMEMultipart("alternative")
