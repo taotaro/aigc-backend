@@ -30,7 +30,7 @@ class TitleEnum(Enum):
 
 class TeacherModel(BaseDBModel):
     # special string type that validates the email as a string
-    email: Annotated[str, Indexed(EmailStr, unique=True)] = Field(...)
+    email: Annotated[str, Indexed(EmailStr)] = Field(...)
     name_english: str = Field(...)
     name_chinese: str = Field(...)
     title: TitleEnum = Field(...)
