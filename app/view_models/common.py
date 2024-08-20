@@ -35,7 +35,7 @@ class RegistrationViewModel(BaseViewModel):
         # print('data: ', self.form_data)
         teacher = await TeacherModel.find_one(TeacherModel.email == self.form_data.email)
         if teacher:
-            self.forbidden('email already registered for another team')
+            self.forbidden('電子郵件已為其他團隊註冊')
         
         all_team_info = []
         
