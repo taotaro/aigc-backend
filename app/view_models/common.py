@@ -139,6 +139,7 @@ class AllDataViewModel(BaseViewModel):
                         "Year of birth": member["year_of_birth"],
                         "Gender": member["gender"],
                         "Grade": member["grade"],
+                        'School Group': member['school_group'],
                         "Student Mobile": member['mobile_phone'],  # Assuming mobile is not provided
                         "Studnet Email": member['email'] # Assuming email is not provided
                     })
