@@ -17,8 +17,8 @@ __all__ = (
 )
 
 class GenderEnum(Enum):
-    Male = 'Male'
-    Female = 'Female'
+    男性 = '男性'
+    女性 = '女性'
 
 class TitleEnum(Enum):
     Mr = 'Mr.'
