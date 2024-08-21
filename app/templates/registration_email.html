@@ -184,7 +184,10 @@
           {% for team in data.info %}
           <table class="team-table">
             <tr>
-              <th colspan="2">團隊名稱：{{team.team_name}}</th>
+              <th colspan="2">
+                <div>團隊名稱：{{team.team_name}}</div>
+                <div>團體: {{team.school_group}}</div>
+              </th>
             </tr>
             <tr>
               <th>姓名（中文）</th>
@@ -197,7 +200,6 @@
             </tr>
             <tr>
               <td colspan="2">
-                <strong>團體: </strong>{{member.school_group}}<br />
                 <strong>出生年份：</strong> {{member.year_of_birth}}<br />
                 <strong>性別：</strong> {{member.gender}}<br />
                 <strong>年級：</strong> {{member.grade}}

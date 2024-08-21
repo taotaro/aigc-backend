@@ -50,7 +50,7 @@ class RegistrationViewModel(BaseViewModel):
                     grade=member['grade'],
                     mobile_phone=member['mobile_phone'],
                     email=member['email'],
-                    school_group=member['school_group'],
+                    # school_group=member['school_group'],
                     teacher_email=self.form_data.email
                 ).insert()
                 team_member_info.append(student_info)
@@ -58,10 +58,12 @@ class RegistrationViewModel(BaseViewModel):
             team_info = await TeamModel(
                 name=team['team_name'],
                 members=team_member_info,
+                school_group=team['school_group'],
                 teacher_email=self.form_data.email
             ).insert()
             all_team_info.append({
                 'team_name': team['team_name'],
+                'school_group': team['school_group'],
                 'members': team_member_info,
             })
 
@@ -133,13 +135,14 @@ class AllDataViewModel(BaseViewModel):
                         "Telephone": data["telephone"],
                         "Email": data["email"],
                         "Team Number": team["team_name"],
+                        "School Group": team["school_group"],
                         "Member Position": "Leader" if index == 0 else None,
                         "Student Name": member["name_english"],
                         "Student Name CN": member["name_chinese"],
                         "Year of birth": member["year_of_birth"],
                         "Gender": member["gender"],
                         "Grade": member["grade"],
-                        'School Group': member['school_group'],
+                        # 'School Group': member['school_group'],
                         "Student Mobile": member['mobile_phone'],  # Assuming mobile is not provided
                         "Studnet Email": member['email'] # Assuming email is not provided
                     })

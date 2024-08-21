@@ -74,7 +74,7 @@ class StudentModel(BaseDBModel):
     year_of_birth: int = Field(...)
     gender: GenderEnum = Field(...)
     grade: int = Field(...)
-    school_group: SchoolGroupEnum = Field(...)
+    # school_group: SchoolGroupEnum = Field(...)
     mobile_phone: Optional[str] = Field(None)
     email: Optional[str] = Field(None)
     teacher_email: Annotated[str, Indexed(EmailStr)] = Field(...)
@@ -88,6 +88,7 @@ class StudentModel(BaseDBModel):
 
 class TeamModel(BaseDBModel):
     name: str = Field(...)
+    school_group: SchoolGroupEnum = Field(...)
     members: List[StudentModel] = Field(...)
     teacher_email: Annotated[str, Indexed(EmailStr)] = Field(...)
 
