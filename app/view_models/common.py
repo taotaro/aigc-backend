@@ -50,6 +50,7 @@ class RegistrationViewModel(BaseViewModel):
                     grade=member['grade'],
                     mobile_phone=member['mobile_phone'],
                     email=member['email'],
+                    school_group=member['school_group'],
                     teacher_email=self.form_data.email
                 ).insert()
                 team_member_info.append(student_info)

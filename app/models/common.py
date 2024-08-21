@@ -27,6 +27,10 @@ class TitleEnum(Enum):
     Dr = 'Dr.'
     Prof = 'Prof.'
 
+class SchoolGroupEnum(Enum):
+    Primary = 'Primary'
+    Secondary = 'Secondary'
+    Disabled = 'Disabled'
 
 class TeacherModel(BaseDBModel):
     # special string type that validates the email as a string
@@ -70,6 +74,7 @@ class StudentModel(BaseDBModel):
     year_of_birth: int = Field(...)
     gender: GenderEnum = Field(...)
     grade: int = Field(...)
+    school_group: SchoolGroupEnum = Field(...)
     mobile_phone: Optional[str] = Field(None)
     email: Optional[str] = Field(None)
     teacher_email: Annotated[str, Indexed(EmailStr)] = Field(...)

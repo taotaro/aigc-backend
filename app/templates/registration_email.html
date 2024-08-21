@@ -7,7 +7,7 @@
     <style>
       body {
         font-family: Arial, sans-serif;
-        background-color: #f5f5f5;
+        background-color: #ffffff;
         margin: 0;
         padding: 0;
         color: #333;
@@ -26,7 +26,9 @@
         padding: 10px;
       }
       .header img {
-        width: 100px;
+        width: 50%;
+        max-width: 100px;
+        height: auto;
       }
       .banner {
         width: 100%;
@@ -34,6 +36,9 @@
       }
       .content {
         padding: 20px;
+      }
+      .content-no-padding {
+        padding: 0;
       }
       .content h1 {
         font-size: 24px;
@@ -106,7 +111,10 @@
       }
       .sponsors img {
         margin: 10px;
-        height: 50px;
+        /* height: 50px; */
+        width: 50%; /* Adjust logo size based on screen width */
+        max-width: 200px; /* Ensure the logo doesn't get too big */
+        height: auto;
       }
       .sponsors h2 {
         margin-bottom: 10px;
@@ -189,6 +197,7 @@
             </tr>
             <tr>
               <td colspan="2">
+                <strong>團體: </strong>{{member.school_group}}<br />
                 <strong>出生年份：</strong> {{member.year_of_birth}}<br />
                 <strong>性別：</strong> {{member.gender}}<br />
                 <strong>年級：</strong> {{member.grade}}
@@ -201,27 +210,27 @@
 
         <!-- 活動查詢及聯絡 -->
         <div class="section-title">活動查詢及聯絡</div>
-        <div class="content">
+        <div class="content-no-padding">
           <p>
-            如有任何活動問題，歡迎聯絡
+            如有任何活動問題，歡迎聯絡Gamenoodlesoup(
             <a
               href="mailto:edu@gamenoodlesoup.com"
               style="color: #ff6a00; word-break: break-all"
             >
-              Gamenoodlesoup
+              edu@gamenoodlesoup.com
             </a>
-            (edu@gamenoodlesoup.com / 30011280)
+            / 30011280)
           </p>
           <p>
-            參賽者必須同意在參與活動時遵守活動條款及細則，
+            參賽者必須同意在參與活動時遵守活動條款及細則，詳情請
             <a
               href="https://aigc-portal-dev.materia-logic.com/terms"
               target="_blank"
               style="color: #ff6a00"
             >
-              詳情請按此查閱
+              按此
             </a>
-            。
+            查閱。
           </p>
           <p>
             是次活動所收集的資料只用作活動登記、通訊及相關用途，並只限Alibaba
