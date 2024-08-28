@@ -1,290 +1,306 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>團隊註冊成功</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #ffffff;
-        margin: 0;
-        padding: 0;
-        color: #333;
-      }
-      .container {
-        max-width: 600px;
-        margin: 20px auto;
-        background-color: #ffffff !important;
-        /* background-color: red !important; */
-        padding: 0;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-      }
-      .header {
-        text-align: center;
-        padding: 10px;
-      }
-      .header img {
-        width: 50%;
-        max-width: 100px;
-        height: auto;
-      }
-      .banner {
-        width: 100%;
-        height: auto;
-      }
-      .content {
-        padding: 20px;
-      }
-      .content-no-padding {
-        padding: 0;
-      }
-      .content h1 {
-        font-size: 24px;
-        color: #ff6a00;
-        font-weight: bold;
-        margin-bottom: 5px;
-      }
-      .content h2 {
-        font-size: 18px;
-        /* color: #ff6a00; */
-        font-weight: bold;
-        margin-bottom: 20px;
-      }
-      .icon-text-wrapper {
-        display: flex;
-        align-items: flex-start;
-        margin-bottom: 15px;
-      }
-      .icon {
-        flex: 0 0 20px;
-        margin-right: 10px;
-      }
-      .icon img {
-        width: 20px;
-        height: 20px;
-      }
-      .text {
-        flex: 1;
-        color: black;
-      }
-      .content p {
-        margin: 15px 0;
-        color: black;
-      }
-      .team-info {
-        margin: 20px 0;
-        display: flex;
-        flex-wrap: wrap;
-      }
-      .team-table {
-        width: 48%;
-        margin: 1%;
-        border-collapse: collapse;
-        background-color: #f9f9f9;
-      }
-      .team-table th,
-      .team-table td {
-        border: 1px solid #ddd;
-        padding: 8px;
-      }
-      .team-table th {
-        background-color: #ff6a00;
-        color: white;
-        text-align: left;
-      }
-      .footer {
-        text-align: center;
-        margin-top: 30px;
-        font-size: 14px;
-        color: #888;
-      }
-      .footer a {
-        color: #888;
-        text-decoration: none;
-      }
-      .sponsors {
-        text-align: center;
-        padding: 20px;
-        margin-top: 30px;
-      }
-      .sponsors img {
-        margin: 10px;
-        /* height: 50px; */
-        width: 50%; /* Adjust logo size based on screen width */
-        max-width: 200px; /* Ensure the logo doesn't get too big */
-        height: auto;
-      }
-      .sponsors h2 {
-        margin-bottom: 10px;
-        font-size: 18px;
-        color: #333;
-      }
-      .section-title {
-        color: #ff6a00;
-        font-size: 20px;
-        font-weight: bold;
-        margin-top: 30px;
-        margin-bottom: 20px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <div class="header">
-        <h1>雲遊通義 – 阿里雲香港10週年校際生成式AI比賽</h1>
-      </div>
-      <img
-        src="https://cri-jh0uqm2iyt2q8ku4-registry.oss-cn-hongkong.aliyuncs.com/index-bg.jpeg"
-        alt="橫幅圖片"
-        class="banner"
-      />
-      <div class="content">
-        <h1>你的參賽申請已被接納</h1>
-        <h2>你提交的參賽資料如下：</h2>
-        <div class="icon-text-wrapper">
-          <div class="icon">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="color-scheme" content="light dark" />
+        <meta name="supported-color-schemes" content="light dark" />
+        <title>團隊註冊成功</title>
+        <style>
+            @media (prefers-color-scheme: dark) {
+                .footer {
+                    background-color: #000000 !important;
+                }
+                p {
+                    color: #ffffff !important;
+                }
+            }
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #ffffff !important;
+                margin: 0;
+                padding: 0;
+                color: #333;
+            }
+            .container {
+                max-width: 600px;
+                margin: 20px auto;
+                background-color: #ffffff !important;
+                padding: 0;
+                border-radius: 8px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                overflow: hidden;
+            }
+            .header {
+                text-align: center;
+                padding: 10px;
+                background-color: #ffffff !important;
+            }
+            .header img {
+                width: 50%;
+                max-width: 100px;
+                height: auto;
+            }
+            .banner {
+                width: 100%;
+                height: auto;
+            }
+            .content {
+                padding: 20px;
+                background-color: #ffffff !important;
+            }
+            .content-no-padding {
+                padding: 0;
+                background-color: #ffffff !important;
+            }
+            .content h1 {
+                font-size: 24px;
+                color: #ff6a00;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+            .content h2 {
+                font-size: 18px;
+                font-weight: bold;
+                margin-bottom: 20px;
+                color: #333 !important;
+            }
+            .icon-text-wrapper {
+                display: flex;
+                align-items: flex-start;
+                margin-bottom: 15px;
+            }
+            .icon {
+                flex: 0 0 20px;
+                margin-right: 10px;
+            }
+            .icon img {
+                width: 20px;
+                height: 20px;
+            }
+            .text {
+                flex: 1;
+                color: black;
+            }
+            .content p {
+                margin: 15px 0;
+                color: black;
+            }
+            .team-info {
+                margin: 20px 0;
+                display: flex;
+                flex-wrap: wrap;
+                background-color: #ffffff !important;
+            }
+            .team-table {
+                width: 48%;
+                margin: 1%;
+                border-collapse: collapse;
+                background-color: #f9f9f9;
+            }
+            .team-table th,
+            .team-table td {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+            .team-table th {
+                background-color: #ff6a00;
+                color: white;
+                text-align: left;
+            }
+            .footer {
+                text-align: center;
+                margin-top: 30px;
+                font-size: 14px;
+                color: #888;
+            }
+            .footer a {
+                color: #888;
+                text-decoration: none;
+            }
+            .sponsors {
+                text-align: center;
+                padding: 20px;
+                margin-top: 30px;
+                background-color: #ffffff !important;
+            }
+            .sponsors img {
+                margin: 10px;
+                width: 50%; /* Adjust logo size based on screen width */
+                max-width: 200px; /* Ensure the logo doesn't get too big */
+                height: auto;
+            }
+            .sponsors h2 {
+                margin-bottom: 10px;
+                font-size: 18px;
+                color: #333;
+            }
+            .section-title {
+                color: #ff6a00;
+                font-size: 20px;
+                font-weight: bold;
+                margin-top: 30px;
+                margin-bottom: 20px;
+            }
+            .img1 {
+                width: 200px;
+                min-height: 150px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>雲遊通義 – 阿里雲香港10週年校際生成式AI比賽</h1>
+            </div>
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Android_Email_8.1_Icon.png"
-              alt="電子郵件圖標"
+                src="https://cri-jh0uqm2iyt2q8ku4-registry.oss-cn-hongkong.aliyuncs.com/index-bg.jpeg"
+                alt="橫幅圖片"
+                class="banner"
             />
-          </div>
-          <div class="text">電子郵件：{{data.email}}</div>
-        </div>
-        <div class="icon-text-wrapper">
-          <div class="icon">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/5/51/Breezeicons-categories-32-applications-education-science.svg"
-              alt="教師圖標"
-            />
-          </div>
-          <div class="text">
-            教師姓名（中文）：{{data.teacher_name_chinese}}<br />
-            教師姓名（英文）：{{data.teacher_name_english}}<br />
-            學校名稱（中文）：{{data.school_name_chinese}}<br />
-            學校名稱（英文）：{{data.school_name_english}}<br />
-            學校地址（中文）：{{data.school_address_chinese}}<br />
-            學校地址（英文）：{{data.school_address_english}}
-          </div>
-        </div>
-        <div class="icon-text-wrapper">
-          <div class="icon">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Phone_Shiny_Icon.svg"
-              alt="電話圖標"
-            />
-          </div>
-          <div class="text">
-            手機號碼：{{data.mobile_phone}}<br />
-            電話號碼：{{data.telephone}}
-          </div>
-        </div>
-        <div class="team-info">
-          {% for team in data.info %}
-          <table class="team-table">
-            <tr>
-              <th colspan="2">
-                <div>團隊名稱：{{team.team_name}}</div>
-                <div>團體: {{team.school_group}}</div>
-              </th>
-            </tr>
-            <tr>
-              <th>姓名（中文）</th>
-              <th>姓名（英文）</th>
-            </tr>
-            {% for member in team.team_members %}
-            <tr>
-              <td>{{member.name_chinese}}</td>
-              <td>{{member.name_english}}</td>
-            </tr>
-            <tr>
-              <td colspan="2">
-                <strong>出生年份：</strong> {{member.year_of_birth}}<br />
-                <strong>性別：</strong> {{member.gender}}<br />
-                <strong>年級：</strong> {{member.grade}}
-              </td>
-            </tr>
-            {% endfor %}
-          </table>
-          {% endfor %}
-        </div>
+            <div class="content">
+                <h1>你的參賽申請已被接納</h1>
+                <h2>你提交的參賽資料如下：</h2>
+                <div class="icon-text-wrapper">
+                    <div class="icon">
+                        <img
+                            src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Android_Email_8.1_Icon.png"
+                            alt="電子郵件圖標"
+                        />
+                    </div>
+                    <div class="text">電子郵件：{{data.email}}</div>
+                </div>
+                <div class="icon-text-wrapper">
+                    <div class="icon">
+                        <img
+                            src="https://upload.wikimedia.org/wikipedia/commons/5/51/Breezeicons-categories-32-applications-education-science.svg"
+                            alt="教師圖標"
+                        />
+                    </div>
+                    <div class="text">
+                        教師姓名（中文）：{{data.teacher_name_chinese}}<br />
+                        教師姓名（英文）：{{data.teacher_name_english}}<br />
+                        學校名稱（中文）：{{data.school_name_chinese}}<br />
+                        學校名稱（英文）：{{data.school_name_english}}<br />
+                    </div>
+                </div>
+                <div class="icon-text-wrapper">
+                    <div class="icon">
+                        <img
+                            src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Phone_Shiny_Icon.svg"
+                            alt="電話圖標"
+                        />
+                    </div>
+                    <div class="text">
+                        手機號碼：{{data.mobile_phone}}<br />
+                        電話號碼：{{data.telephone}}
+                    </div>
+                </div>
+                <div class="team-info">
+                    {% for team in data.info %}
+                    <table class="team-table">
+                        <tr>
+                            <th colspan="2">
+                                <div>團隊名稱：{{team.team_name}}</div>
+                                <div>團體: {{team.school_group}}</div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>姓名</th>
+                            <!-- <th>姓名（英文）</th> -->
+                        </tr>
+                        {% for member in team.team_members %}
+                        <tr>
+                            <td>{{member.name_chinese}}</td>
+                            <!-- <td>{{member.name_english}}</td> -->
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <!-- <strong>出生年份：</strong> -->
+                                <!-- {{member.year_of_birth}}<br /> -->
+                                <!-- <strong>性別：</strong> {{member.gender}}<br /> -->
+                                <strong>年級：</strong> {{member.grade}}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    {% endfor %}
+                </div>
 
-        <!-- 活動查詢及聯絡 -->
-        <div class="section-title">活動查詢及聯絡</div>
-        <div class="content-no-padding">
-          <p>
-            如有任何活動問題，歡迎聯絡Gamenoodlesoup(
-            <a
-              href="mailto:edu@gamenoodlesoup.com"
-              style="color: #ff6a00; word-break: break-all"
-            >
-              edu@gamenoodlesoup.com
-            </a>
-            / 30011280)
-          </p>
-          <p>
-            參賽者必須同意在參與活動時遵守活動條款及細則，詳情請
-            <a
-              href="https://aigc-portal-dev.materia-logic.com/terms"
-              target="_blank"
-              style="color: #ff6a00"
-            >
-              按此
-            </a>
-            查閱。
-          </p>
-          <p>
-            是次活動所收集的資料只用作活動登記、通訊及相關用途，並只限Alibaba
-            Cloud及其授權之服務承辦商存取。登記者有權要求查閱、更正或刪除其個人資料。如有查詢，與我們聯絡。有關詳情亦可瀏覽
-            <a
-              href="https://www.alibabacloud.com/help/tc/legal/latest/alibaba-cloud-international-website-privacy-policy"
-              target="_blank"
-              style="color: #ff6a00"
-            >
-              Alibaba Cloud的私隱政策
-            </a>
-            。
-          </p>
-        </div>
-        <!-- 結束 -->
+                <!-- 活動查詢及聯絡 -->
+                <div class="section-title">活動查詢及聯絡</div>
+                <div class="content-no-padding">
+                    <p>
+                        如有任何活動問題，歡迎聯絡Gamenoodlesoup(
+                        <a
+                            href="mailto:edu@gamenoodlesoup.com"
+                            style="color: #ff6a00; word-break: break-all"
+                        >
+                            edu@gamenoodlesoup.com
+                        </a>
+                        / 30011280)
+                    </p>
+                    <p>
+                        參賽者必須同意在參與活動時遵守活動條款及細則，詳情請
+                        <a
+                            href="https://aigc-portal-dev.materia-logic.com/terms"
+                            target="_blank"
+                            style="color: #ff6a00"
+                        >
+                            按此
+                        </a>
+                        查閱。
+                    </p>
+                    <p>
+                        是次活動所收集的資料只用作活動登記、通訊及相關用途，並只限Alibaba
+                        Cloud及其授權之服務承辦商存取。登記者有權要求查閱、更正或刪除其個人資料。如有查詢，與我們聯絡。有關詳情亦可瀏覽
+                        <a
+                            href="https://www.alibabacloud.com/help/tc/legal/latest/alibaba-cloud-international-website-privacy-policy"
+                            target="_blank"
+                            style="color: #ff6a00"
+                        >
+                            Alibaba Cloud的私隱政策
+                        </a>
+                        。
+                    </p>
+                </div>
+                <!-- 結束 -->
 
-        <div class="sponsors">
-          <h2>活動主辦</h2>
-          <img
-            style="width: 200px; min-height: 150px"
-            src="https://cri-jh0uqm2iyt2q8ku4-registry.oss-cn-hongkong.aliyuncs.com/ali.jpeg"
-            alt="Alibaba Cloud Logo"
-          />
-          <h2>支持單位</h2>
-          <img
-            style="width: 200px; min-height: 70px"
-            src="https://cri-jh0uqm2iyt2q8ku4-registry.oss-cn-hongkong.aliyuncs.com/gns.png"
-            alt="Supporting Unit 1 Logo"
-          />
-          <img
-            style="width: 200px; min-height: 100px"
-            src="https://cri-jh0uqm2iyt2q8ku4-registry.oss-cn-hongkong.aliyuncs.com/ml.png"
-            alt="Supporting Unit 2 Logo"
-          />
-          <img
-            style="width: 200px"
-            src="https://cri-jh0uqm2iyt2q8ku4-registry.oss-cn-hongkong.aliyuncs.com/teachers.jpeg"
-            alt="Supporting Unit 3 Logo"
-          />
-          <img
-            style="width: 200px"
-            src="https://cri-jh0uqm2iyt2q8ku4-registry.oss-cn-hongkong.aliyuncs.com/aitle.png"
-            alt="Supporting Unit 4 Logo"
-          />
-          <img
-            style="width: 200px"
-            src="https://cri-jh0uqm2iyt2q8ku4-registry.oss-cn-hongkong.aliyuncs.com/steelseries.png"
-            alt="Supporting Unit 5 Logo"
-          />
+                <div class="sponsors">
+                    <h2>活動主辦</h2>
+                    <img
+                        style="width: 200px; min-height: 150px"
+                        src="https://cri-jh0uqm2iyt2q8ku4-registry.oss-cn-hongkong.aliyuncs.com/ali.jpeg"
+                        alt="Alibaba Cloud Logo"
+                    />
+                    <h2>支持單位</h2>
+                    <img
+                        style="width: 200px; min-height: 70px"
+                        src="https://cri-jh0uqm2iyt2q8ku4-registry.oss-cn-hongkong.aliyuncs.com/gns.png"
+                        alt="Supporting Unit 1 Logo"
+                    />
+                    <img
+                        style="width: 200px; min-height: 100px"
+                        src="https://cri-jh0uqm2iyt2q8ku4-registry.oss-cn-hongkong.aliyuncs.com/ml.png"
+                        alt="Supporting Unit 2 Logo"
+                    />
+                    <img
+                        style="width: 200px"
+                        src="https://cri-jh0uqm2iyt2q8ku4-registry.oss-cn-hongkong.aliyuncs.com/teachers.jpeg"
+                        alt="Supporting Unit 3 Logo"
+                    />
+                    <img
+                        style="width: 200px"
+                        src="https://cri-jh0uqm2iyt2q8ku4-registry.oss-cn-hongkong.aliyuncs.com/aitle.png"
+                        alt="Supporting Unit 4 Logo"
+                    />
+                    <img
+                        style="width: 200px"
+                        src="https://cri-jh0uqm2iyt2q8ku4-registry.oss-cn-hongkong.aliyuncs.com/steelseries.png"
+                        alt="Supporting Unit 5 Logo"
+                    />
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </body>
+    </body>
 </html>

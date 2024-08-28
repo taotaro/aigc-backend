@@ -40,8 +40,8 @@ class TeacherModel(BaseDBModel):
     title: TitleEnum = Field(...)
     school_name_chinese: str = Field(...)
     school_name_english: str = Field(...)
-    school_address_chinese: str = Field(...)
-    school_address_english: str = Field(...)
+    # school_address_chinese: str = Field(...)
+    # school_address_english: str = Field(...)
     mobile_phone: str = Field(...)
     telephone: str = Field(...)
     teams: List[dict] = Field([])
@@ -62,21 +62,21 @@ class TeacherModel(BaseDBModel):
             'nameEnglish': self.name_english,
             'schoolNameChinese': self.school_name_chinese,
             'schoolNameEnglish': self.school_name_english,
-            'schoolAddressChinese': self.school_address_chinese,
-            'schoolAddressEnglish': self.school_address_english,
+            # 'schoolAddressChinese': self.school_address_chinese,
+            # 'schoolAddressEnglish': self.school_address_english,
             'mobilePhone': self.mobile_phone,
             'telephone': self.telephone,
         }
 
 class StudentModel(BaseDBModel):
-    name_english: str = Field(...)
+    # name_english: str = Field(...)
     name_chinese: str = Field(...)
-    year_of_birth: int = Field(...)
-    gender: GenderEnum = Field(...)
+    # year_of_birth: int = Field(...)
+    # gender: GenderEnum = Field(...)
     grade: int = Field(...)
     # school_group: SchoolGroupEnum = Field(...)
-    mobile_phone: Optional[str] = Field(None)
-    email: Optional[str] = Field(None)
+    # mobile_phone: Optional[str] = Field(None)
+    # email: Optional[str] = Field(None)
     teacher_email: Annotated[str, Indexed(EmailStr)] = Field(...)
 
     class Settings:

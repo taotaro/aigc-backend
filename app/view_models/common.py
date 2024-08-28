@@ -43,13 +43,13 @@ class RegistrationViewModel(BaseViewModel):
             team_member_info = []
             for member in team['team_members']:
                 student_info = await StudentModel(
-                    name_english=member['name_english'],
+                    # name_english=member['name_english'],
                     name_chinese=member['name_chinese'],
-                    year_of_birth=member['year_of_birth'],
-                    gender=member['gender'],
+                    # year_of_birth=member['year_of_birth'],
+                    # gender=member['gender'],
                     grade=member['grade'],
-                    mobile_phone=member['mobile_phone'],
-                    email=member['email'],
+                    # mobile_phone=member['mobile_phone'],
+                    # email=member['email'],
                     # school_group=member['school_group'],
                     teacher_email=self.form_data.email
                 ).insert()
@@ -74,8 +74,8 @@ class RegistrationViewModel(BaseViewModel):
             name_chinese=self.form_data.name_chinese,
             school_name_english=self.form_data.school_name_english,
             school_name_chinese=self.form_data.school_name_chinese,
-            school_address_english=self.form_data.school_address_english,
-            school_address_chinese=self.form_data.school_address_chinese,
+            # school_address_english=self.form_data.school_address_english,
+            # school_address_chinese=self.form_data.school_address_chinese,
             mobile_phone=self.form_data.mobile_phone,
             telephone=self.form_data.telephone,
             title=self.form_data.title,
@@ -89,8 +89,8 @@ class RegistrationViewModel(BaseViewModel):
             'teacher_name_english': self.form_data.name_english,
             'school_name_chinese': self.form_data.school_name_chinese,
             'school_name_english': self.form_data.school_name_english,
-            'school_address_chinese': self.form_data.school_address_chinese,
-            'school_address_english': self.form_data.school_address_english,
+            # 'school_address_chinese': self.form_data.school_address_chinese,
+            # 'school_address_english': self.form_data.school_address_english,
             'mobile_phone': self.form_data.mobile_phone,
             'telephone': self.form_data.telephone,
             'info': self.form_data.team_info
@@ -137,14 +137,14 @@ class AllDataViewModel(BaseViewModel):
                         "Team Number": team["team_name"],
                         "School Group": team["school_group"],
                         "Member Position": "Leader" if index == 0 else None,
-                        "Student Name": member["name_english"],
-                        "Student Name CN": member["name_chinese"],
-                        "Year of birth": member["year_of_birth"],
-                        "Gender": member["gender"],
+                        # "Student Name": member["name_english"],
+                        "Student Name": member["name_chinese"],
+                        # "Year of birth": member["year_of_birth"],
+                        # "Gender": member["gender"],
                         "Grade": member["grade"],
                         # 'School Group': member['school_group'],
-                        "Student Mobile": member['mobile_phone'],  # Assuming mobile is not provided
-                        "Studnet Email": member['email'] # Assuming email is not provided
+                        # "Student Mobile": member['mobile_phone'],  # Assuming mobile is not provided
+                        # "Studnet Email": member['email'] # Assuming email is not provided
                     })
 
         df = pd.DataFrame(all_records)
