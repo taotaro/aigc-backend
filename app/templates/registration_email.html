@@ -206,13 +206,16 @@
                                 <div>團體: {{team.school_group}}</div>
                             </th>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                             <th>姓名</th>
-                            <!-- <th>姓名（英文）</th> -->
-                        </tr>
+                            <th>姓名（英文）</th> 
+                        </tr> -->
                         {% for member in team.team_members %}
                         <tr>
-                            <td>{{member.name_chinese}}</td>
+                            <td>
+                                <strong>姓名: </strong>
+                                {{member.name_chinese}}
+                            </td>
                             <!-- <td>{{member.name_english}}</td> -->
                         </tr>
                         <tr>
@@ -237,7 +240,7 @@
                             href="mailto:edu@gamenoodlesoup.com"
                             style="color: #ff6a00"
                         >
-                            edu@gamenoodlesoup.com </a
+                            edu@gamenoodlesoup.com</a
                         >/ 30011280)
                     </p>
                     <p>
@@ -246,10 +249,8 @@
                             href="https://aigc-portal-dev.materia-logic.com/terms"
                             target="_blank"
                             style="color: #ff6a00"
-                        >
-                            按此
-                        </a>
-                        查閱。
+                            >按此</a
+                        >查閱。
                     </p>
                     <p>
                         是次活動所收集的資料只用作活動登記、通訊及相關用途，並只限Alibaba
@@ -259,23 +260,21 @@
                             target="_blank"
                             style="color: #ff6a00"
                         >
-                            Alibaba Cloud的私隱政策 </a
+                            Alibaba Cloud的私隱政策</a
                         >、通義平台的
                         <a
                             href="https://terms.alicdn.com/legal-agreement/terms/c_end_product_protocol/20231011201348415/20231011201348415.html"
                             target="_blank"
                             style="color: #ff6a00"
                         >
-                            用戶協議
-                        </a>
-                        和
-                        <a
+                            用戶協議</a
+                        >和<a
                             href="https://terms.alicdn.com/legal-agreement/terms/privacy_policy_full/20231011201849846/20231011201849846.html"
                             target="_blank"
                             style="color: #ff6a00"
                         >
-                            私隱政策。
-                        </a>
+                            私隱政策</a
+                        >。
                     </p>
                 </div>
                 <!-- 結束 -->
