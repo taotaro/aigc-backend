@@ -28,9 +28,9 @@ class TitleEnum(Enum):
     Prof = 'Prof.'
 
 class SchoolGroupEnum(Enum):
-    Primary = 'Primary'
-    Secondary = 'Secondary'
-    Disabled = 'Disabled'
+    小學組= '小學組'
+    中學組 = '中學組'
+    展能組 = '展能組'
 
 class TeacherModel(BaseDBModel):
     # special string type that validates the email as a string
