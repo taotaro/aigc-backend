@@ -73,7 +73,7 @@ class StudentModel(BaseDBModel):
     name_chinese: str = Field(...)
     # year_of_birth: int = Field(...)
     # gender: GenderEnum = Field(...)
-    grade: int = Field(...)
+    grade: str = Field(...)
     # school_group: SchoolGroupEnum = Field(...)
     # mobile_phone: Optional[str] = Field(None)
     # email: Optional[str] = Field(None)
