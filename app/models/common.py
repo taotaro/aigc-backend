@@ -26,6 +26,7 @@ class TitleEnum(Enum):
     Miss = 'Miss.'
     Dr = 'Dr.'
     Prof = 'Prof.'
+    Ms = 'Ms.'
 
 class SchoolGroupEnum(Enum):
     小學組= '小學組'
