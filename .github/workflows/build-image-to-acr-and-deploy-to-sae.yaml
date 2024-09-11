@@ -4,7 +4,7 @@ name: "Build Docker Image To ACR And Deploy To SAE"
 on:
   push:
     branches:
-      - staging
+      - development
   pull_request:
     branches:
       - development
@@ -18,7 +18,7 @@ jobs:
     # 根据触发分支选择各自的环境变量
     # base_ref：pr 特有，表示目标分支
     # ref_name：push 时有效，标识提交分支
-    environment: ${{ github.base_ref || 'development' }}-env
+    environment: ${{ github.base_ref || github.ref_name }}-env
     # 环境变量，有效范围取决于所在层级，在 root 层级为全局变量
     env:
       TZ: Asia/Shanghai
