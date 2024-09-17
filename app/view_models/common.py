@@ -25,12 +25,15 @@ class RegistrationViewModel(BaseViewModel):
         self.form_data = form_data
 
     async def before(self):
+        if '@' not in self.form_data.email:
+            self.operating_failed('電子郵件地址無效')
         try:
             await self.register()
         except TimeoutException as e:
             self.request_timeout(str(e))
 
     async def register(self):
+        print('registering...: ', self.form_data)
         all_team_info = []
         
         for team in self.form_data.team_info:
