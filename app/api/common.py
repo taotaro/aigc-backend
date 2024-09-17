@@ -21,4 +21,10 @@ async def excel_data_export():
             return StreamingResponse(response.excel_file, media_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', headers={'Content-Disposition': 'attachment; filename=all_data.xlsx'})
         else:
             return 'No data found'
+
+
+@router.post('/log-error')
+async def log_error(form_data: LogErrorForm):
+    print('logging error: ', form_data)
+    return {'status':'error logged'}
     

@@ -8,6 +8,7 @@ from app.models.common import TitleEnum
 
 __all__ = (
     'RegistrationForm',
+    'LogErrorForm',
 )
 
 
@@ -24,3 +25,6 @@ class RegistrationForm(_BaseModel):
     mobile_phone: str = _Body(..., embed=True)
     telephone: str = _Body(..., embed=True)
     team_info: list[dict] = _Body(..., embed=True)
+
+class LogErrorForm(_BaseModel):
+    error: object = _Body(..., embed=True)
