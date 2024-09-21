@@ -202,6 +202,7 @@ class BaseViewModel:
         raise ViewModelRequestException(message=msg)
 
     def send_email(self, sender: str, receiver: str, body: str, subject: str = 'subject') -> bool:
+        
         try:
             settings = get_settings()
             message = MIMEMultipart("alternative")
@@ -225,7 +226,8 @@ class BaseViewModel:
         except SMTPException:
             return False
         except Exception as ex:
-            self.system_error(f'system error for sending email: {str(ex)}, please contact the system administrator')
+            # self.system_error(f'system error for sending email: {str(ex)}, please contact the system administrator')
+            self.system_error(f'發送電子郵件時系統錯誤，請聯絡系統管理員')
 
 
     @staticmethod
