@@ -11,6 +11,7 @@ from app.models.common import *
 from app.libs.custom import render_template
 import pandas as pd
 from io import BytesIO
+import secrets
 
 __all__ = (
     'RegistrationViewModel',
@@ -40,28 +41,26 @@ class RegistrationViewModel(BaseViewModel):
             team_member_info = []
             for member in team['team_members']:
                 student_info = await StudentModel(
-                    # name_english=member['name_english'],
                     name_chinese=member['name_chinese'],
-                    # year_of_birth=member['year_of_birth'],
-                    # gender=member['gender'],
                     grade=member['grade'],
-                    # mobile_phone=member['mobile_phone'],
-                    # email=member['email'],
-                    # school_group=member['school_group'],
                     teacher_email=self.form_data.email
                 ).insert()
                 team_member_info.append(student_info)
+
+            secret_code = secrets.token_hex(6)[:12]
 
             team_info = await TeamModel(
                 name=team['team_name'],
                 members=team_member_info,
                 school_group=team['school_group'],
-                teacher_email=self.form_data.email
+                teacher_email=self.form_data.email,
+                secret_code=secret_code
             ).insert()
             all_team_info.append({
                 'team_name': team['team_name'],
                 'school_group': team['school_group'],
                 'members': team_member_info,
+                'secret_code': secret_code
             })
 
 
@@ -71,8 +70,6 @@ class RegistrationViewModel(BaseViewModel):
             name_chinese=self.form_data.name_chinese,
             school_name_english=self.form_data.school_name_english,
             school_name_chinese=self.form_data.school_name_chinese,
-            # school_address_english=self.form_data.school_address_english,
-            # school_address_chinese=self.form_data.school_address_chinese,
             mobile_phone=self.form_data.mobile_phone,
             telephone=self.form_data.telephone,
             title=self.form_data.title,
@@ -80,17 +77,15 @@ class RegistrationViewModel(BaseViewModel):
         ).insert()
 
         email_body = render_template('registration_email.html', {
-            # 'team_name': self.form_data.team_name,
             'email': self.form_data.email,
             'teacher_name_chinese': self.form_data.name_chinese,
             'teacher_name_english': self.form_data.name_english,
             'school_name_chinese': self.form_data.school_name_chinese,
             'school_name_english': self.form_data.school_name_english,
-            # 'school_address_chinese': self.form_data.school_address_chinese,
-            # 'school_address_english': self.form_data.school_address_english,
             'mobile_phone': self.form_data.mobile_phone,
             'telephone': self.form_data.telephone,
-            'info': self.form_data.team_info
+            # 'info': self.form_data.team_info,
+            'info': all_team_info
         })
 
         email_status = self.send_email(

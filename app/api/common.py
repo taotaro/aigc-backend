@@ -8,7 +8,6 @@ router = APIRouter(
     prefix='/common', tags=['Common API'], dependencies=[]
 )
 
-
 @router.post('/register')
 async def register_account(form_data: RegistrationForm):
     async with RegistrationViewModel(form_data) as response:
