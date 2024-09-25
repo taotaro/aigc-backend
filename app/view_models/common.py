@@ -11,6 +11,7 @@ from app.models.common import *
 from app.libs.custom import render_template
 import pandas as pd
 from io import BytesIO
+import secrets
 
 __all__ = (
     'RegistrationViewModel',
@@ -40,28 +41,26 @@ class RegistrationViewModel(BaseViewModel):
             team_member_info = []
             for member in team['team_members']:
                 student_info = await StudentModel(
-                    # name_english=member['name_english'],
                     name_chinese=member['name_chinese'],
-                    # year_of_birth=member['year_of_birth'],
-                    # gender=member['gender'],
                     grade=member['grade'],
-                    # mobile_phone=member['mobile_phone'],
-                    # email=member['email'],
-                    # school_group=member['school_group'],
                     teacher_email=self.form_data.email
                 ).insert()
                 team_member_info.append(student_info)
+
+            secret_code = str(secrets.randbelow(10**12)).zfill(12)
 
             team_info = await TeamModel(
                 name=team['team_name'],
                 members=team_member_info,
                 school_group=team['school_group'],
-                teacher_email=self.form_data.email
+                teacher_email=self.form_data.email,
+                secret_code=secret_code
             ).insert()
             all_team_info.append({
                 'team_name': team['team_name'],
                 'school_group': team['school_group'],
                 'members': team_member_info,
+                'secret_code': secret_code
             })
 
 
@@ -71,8 +70,6 @@ class RegistrationViewModel(BaseViewModel):
             name_chinese=self.form_data.name_chinese,
             school_name_english=self.form_data.school_name_english,
             school_name_chinese=self.form_data.school_name_chinese,
-            # school_address_english=self.form_data.school_address_english,
-            # school_address_chinese=self.form_data.school_address_chinese,
             mobile_phone=self.form_data.mobile_phone,
             telephone=self.form_data.telephone,
             title=self.form_data.title,
@@ -80,17 +77,15 @@ class RegistrationViewModel(BaseViewModel):
         ).insert()
 
         email_body = render_template('registration_email.html', {
-            # 'team_name': self.form_data.team_name,
             'email': self.form_data.email,
             'teacher_name_chinese': self.form_data.name_chinese,
             'teacher_name_english': self.form_data.name_english,
             'school_name_chinese': self.form_data.school_name_chinese,
             'school_name_english': self.form_data.school_name_english,
-            # 'school_address_chinese': self.form_data.school_address_chinese,
-            # 'school_address_english': self.form_data.school_address_english,
             'mobile_phone': self.form_data.mobile_phone,
             'telephone': self.form_data.telephone,
-            'info': self.form_data.team_info
+            # 'info': self.form_data.team_info,
+            'info': all_team_info
         })
 
         email_status = self.send_email(
@@ -121,11 +116,15 @@ class AllDataViewModel(BaseViewModel):
         all_records = []
         for data in data_list:
             for team in data['teams']:
+                print(team)
+                if 'secret_code' in team:
+                    secret_code = team['secret_code']
+                else:
+                    secret_code = None
                 for index, member in enumerate(team['members']):
                     all_records.append({
                         "School Name": data["school_name_english"],
                         "School Name CN": data["school_name_chinese"],
-                        # "Title": data["title"],
                         "Teacher Name": data["name_english"],
                         "Teacher Name CN": data["name_chinese"],
                         "School Phone": data["mobile_phone"],
@@ -133,15 +132,10 @@ class AllDataViewModel(BaseViewModel):
                         "Email": data["email"],
                         "Team Number": team["team_name"],
                         "School Group": team["school_group"],
+                        'Secret Code': secret_code,
                         "Member Position": "Leader" if index == 0 else None,
-                        # "Student Name": member["name_english"],
                         "Student Name": member["name_chinese"],
-                        # "Year of birth": member["year_of_birth"],
-                        # "Gender": member["gender"],
                         "Grade": member["grade"],
-                        # 'School Group': member['school_group'],
-                        # "Student Mobile": member['mobile_phone'],  # Assuming mobile is not provided
-                        # "Studnet Email": member['email'] # Assuming email is not provided
                     })
 
         df = pd.DataFrame(all_records)
@@ -149,8 +143,6 @@ class AllDataViewModel(BaseViewModel):
         df.to_excel(self.excel_file, index=False, engine='openpyxl')
         
         self.excel_file.seek(0)
-
-        # for teacher in all_teacher_data:
 
 
     

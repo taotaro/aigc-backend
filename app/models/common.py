@@ -92,6 +92,7 @@ class TeamModel(BaseDBModel):
     school_group: SchoolGroupEnum = Field(...)
     members: List[StudentModel] = Field(...)
     teacher_email: Annotated[str, Indexed(EmailStr)] = Field(...)
+    secret_code: Optional[str] = Field(None)
 
     class Settings:
         name = 'teams'
