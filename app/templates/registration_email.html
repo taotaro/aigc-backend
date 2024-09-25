@@ -204,13 +204,14 @@
                             <th colspan="2">
                                 <div>團隊名稱：{{team.team_name}}</div>
                                 <div>團體: {{team.school_group}}</div>
+                                <div>密碼: {{team.secret_code}}</div>
                             </th>
                         </tr>
                         <!-- <tr>
                             <th>姓名</th>
                             <th>姓名（英文）</th> 
                         </tr> -->
-                        {% for member in team.team_members %}
+                        {% for member in team.members %}
                         <tr>
                             <td>
                                 <strong>姓名: </strong>
