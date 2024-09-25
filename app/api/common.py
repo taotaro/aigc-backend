@@ -17,7 +17,7 @@ async def register_account(form_data: RegistrationForm):
 async def excel_data_export():
     async with AllDataViewModel() as response:
         if response.excel_file:
-            return StreamingResponse(response.excel_file, media_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', headers={'Content-Disposition': 'attachment; filename=all_data.xlsx'})
+            return StreamingResponse(response.excel_file, media_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', headers={'Content-Disposition': 'attachment; filename=Registration_Data.xlsx'})
         else:
             return 'No data found'
 
