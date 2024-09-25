@@ -47,7 +47,7 @@ class RegistrationViewModel(BaseViewModel):
                 ).insert()
                 team_member_info.append(student_info)
 
-            secret_code = secrets.token_hex(6)[:12]
+            secret_code = str(secrets.randbelow(10**12)).zfill(12)
 
             team_info = await TeamModel(
                 name=team['team_name'],
@@ -116,11 +116,15 @@ class AllDataViewModel(BaseViewModel):
         all_records = []
         for data in data_list:
             for team in data['teams']:
+                print(team)
+                if 'secret_code' in team:
+                    secret_code = team['secret_code']
+                else:
+                    secret_code = None
                 for index, member in enumerate(team['members']):
                     all_records.append({
                         "School Name": data["school_name_english"],
                         "School Name CN": data["school_name_chinese"],
-                        # "Title": data["title"],
                         "Teacher Name": data["name_english"],
                         "Teacher Name CN": data["name_chinese"],
                         "School Phone": data["mobile_phone"],
@@ -128,15 +132,10 @@ class AllDataViewModel(BaseViewModel):
                         "Email": data["email"],
                         "Team Number": team["team_name"],
                         "School Group": team["school_group"],
+                        'Secret Code': secret_code,
                         "Member Position": "Leader" if index == 0 else None,
-                        # "Student Name": member["name_english"],
                         "Student Name": member["name_chinese"],
-                        # "Year of birth": member["year_of_birth"],
-                        # "Gender": member["gender"],
                         "Grade": member["grade"],
-                        # 'School Group': member['school_group'],
-                        # "Student Mobile": member['mobile_phone'],  # Assuming mobile is not provided
-                        # "Studnet Email": member['email'] # Assuming email is not provided
                     })
 
         df = pd.DataFrame(all_records)
@@ -144,8 +143,6 @@ class AllDataViewModel(BaseViewModel):
         df.to_excel(self.excel_file, index=False, engine='openpyxl')
         
         self.excel_file.seek(0)
-
-        # for teacher in all_teacher_data:
 
 
     
