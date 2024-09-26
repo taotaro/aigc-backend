@@ -16,6 +16,7 @@ import secrets
 __all__ = (
     'RegistrationViewModel',
     'AllDataViewModel',
+    'AddSecretCode',
 )
 
 
@@ -145,4 +146,25 @@ class AllDataViewModel(BaseViewModel):
         self.excel_file.seek(0)
 
 
+
+class AddSecretCode(BaseViewModel):
+
+    def __init__(self):
+        super().__init__(need_auth=False)
+
+    async def before(self):
+        try:
+            await self.add_secret_code()
+        except TimeoutException as e:
+            self.request_timeout(str(e))
+
+    async def add_secret_code(self):
+        all_teachers = await TeacherModel.find_all().to_list()
+
+        for teacher in all_teachers:
+            for team in teacher['teams']:
+                secret_code=str(secrets.randbelow(10**12)).zfill(12)
+                team['secret_code'] = secret_code
+            # Flag to track if we made any updates
+            await teacher.update_fields(teams=teacher['teams'])
     

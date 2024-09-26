@@ -26,4 +26,10 @@ async def excel_data_export():
 async def log_error(form_data: LogErrorForm):
     print('logging error: ', form_data)
     return {'status':'error logged'}
+
+
+@router.get('/add-code')
+async def add_secret_code():
+    async with AddSecretCode() as response:
+        return response
     
