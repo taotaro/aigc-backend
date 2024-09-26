@@ -12,6 +12,8 @@ from app.libs.custom import render_template
 import pandas as pd
 from io import BytesIO
 import secrets
+from motor.motor_asyncio import AsyncIOMotorClient
+import msoffcrypto
 
 __all__ = (
     'RegistrationViewModel',
@@ -116,7 +118,6 @@ class AllDataViewModel(BaseViewModel):
         all_records = []
         for data in data_list:
             for team in data['teams']:
-                print(team)
                 if 'secret_code' in team:
                     secret_code = team['secret_code']
                 else:
@@ -144,5 +145,23 @@ class AllDataViewModel(BaseViewModel):
         
         self.excel_file.seek(0)
 
+        password = get_settings().FILE_PASSWORD  # Set your password here
 
-    
+        # Create a new buffer to hold the encrypted file
+        encrypted_file = BytesIO()
+
+        # Load the unencrypted Excel file into msoffcrypto
+        excel_file = msoffcrypto.OfficeFile(self.excel_file)
+        excel_file.load_key(password=password)  # Set the password
+
+        # Encrypt the file and write the encrypted content to the new buffer
+        excel_file.encrypt(outfile=encrypted_file, password=password)
+
+        # Reset the pointer to the start of the encrypted file
+        encrypted_file.seek(0)
+
+        # Replace the original file buffer with the encrypted one
+        self.excel_file = encrypted_file
+
+
+
