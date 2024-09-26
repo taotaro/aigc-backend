@@ -13,7 +13,7 @@ async def register_account(form_data: RegistrationForm):
     async with RegistrationViewModel(form_data) as response:
         return response
 
-@router.get("/excel-data")
+@router.get("/wRhfMDBJY0FrbZzEdiE1fKtZ5HXPGVo0")
 async def excel_data_export():
     async with AllDataViewModel() as response:
         if response.excel_file:
