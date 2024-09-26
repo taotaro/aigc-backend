@@ -27,6 +27,7 @@ python-jenkins = "*"
 email-validator = "*"
 pdfkit = "*"
 openpyxl = "*"
+msoffcrypto-tool = "*"
 
 [dev-packages]
 
