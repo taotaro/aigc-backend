@@ -28,6 +28,8 @@ class Settings(BaseSettings):
     MAIL_USERNAME: str
     MAIL_PASSWORD: str
 
+    FILE_PASSWORD: str
+
 
 
     class Config:
