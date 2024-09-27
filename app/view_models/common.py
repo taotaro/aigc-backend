@@ -15,6 +15,7 @@ import secrets
 from motor.motor_asyncio import AsyncIOMotorClient
 import msoffcrypto
 from fastapi.responses import StreamingResponse
+from datetime import datetime
 
 __all__ = (
     'RegistrationViewModel',
@@ -128,8 +129,13 @@ class AllDataViewModel(BaseViewModel):
                     secret_code = team['secret_code']
                 else:
                     secret_code = None
+                print('data: ', data.createdAt)
+                created_at = data.createdAt
+                print('created_at: ', created_at)
+                formatted_created_at = datetime.strptime(str(created_at), "%Y-%m-%d %H:%M:%S.%f")
                 for index, member in enumerate(team['members']):
                     all_records.append({
+                        "Created At": formatted_created_at.strftime("%Y-%m-%d %H:%M:%S"),
                         "School Name": data["school_name_english"],
                         "School Name CN": data["school_name_chinese"],
                         "Teacher Name": data["name_english"],
