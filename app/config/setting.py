@@ -30,6 +30,8 @@ class Settings(BaseSettings):
 
     FILE_PASSWORD: str
 
+    COOKIE_KEY: str
+
 
 
     class Config:

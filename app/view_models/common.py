@@ -1,7 +1,7 @@
 import bcrypt
 from fastapi import Request
 from httpx import ReadTimeout
-from httpx import TimeoutException
+from httpx import TimeoutException, ReadTimeout
 
 from app.config import get_settings
 from app.forms.common import *
@@ -14,10 +14,14 @@ from io import BytesIO
 import secrets
 from motor.motor_asyncio import AsyncIOMotorClient
 import msoffcrypto
+from fastapi.responses import StreamingResponse
+from datetime import datetime
 
 __all__ = (
     'RegistrationViewModel',
     'AllDataViewModel',
+    'LoginViewModel',
+    'RegisterEmailViewModel',
 )
 
 
@@ -103,16 +107,19 @@ class RegistrationViewModel(BaseViewModel):
 
 class AllDataViewModel(BaseViewModel):
 
-    def __init__(self):
-        super().__init__(need_auth=False)
+    def __init__(self, request: Request):
+        super().__init__(request=request)
+        print('self.token: ', self.token)
 
+    
     async def before(self):
         try:
             await self.get_all_data()
-        except TimeoutException as e:
+        except ReadTimeout as e:
             self.request_timeout(str(e))
 
     async def get_all_data(self):
+        
         data_list = await TeacherModel.find_all().to_list()
 
         all_records = []
@@ -122,8 +129,13 @@ class AllDataViewModel(BaseViewModel):
                     secret_code = team['secret_code']
                 else:
                     secret_code = None
+                print('data: ', data.createdAt)
+                created_at = data.createdAt
+                print('created_at: ', created_at)
+                formatted_created_at = datetime.strptime(str(created_at), "%Y-%m-%d %H:%M:%S.%f")
                 for index, member in enumerate(team['members']):
                     all_records.append({
+                        "Created At": formatted_created_at.strftime("%Y-%m-%d %H:%M:%S"),
                         "School Name": data["school_name_english"],
                         "School Name CN": data["school_name_chinese"],
                         "Teacher Name": data["name_english"],
@@ -162,6 +174,61 @@ class AllDataViewModel(BaseViewModel):
 
         # Replace the original file buffer with the encrypted one
         self.excel_file = encrypted_file
+        self.operating_successfully(self.excel_file)
+
+
+class RegisterEmailViewModel(BaseViewModel):
+
+    def __init__(self, form_data: RegisterPassword):
+        super().__init__(need_auth=False)
+
+        self.form_data = form_data
+
+    async def before(self):
+        try:
+            await self.register()
+        except TimeoutException as e:
+            self.request_timeout(str(e))
+
+    async def register(self):
+        # email = self.form_data.email.lower()
+        # user = await LoginModel.find_one(LoginModel.email == email)
+        # if user:
+        #     self.forbidden('email already exists')
+        salt = bcrypt.gensalt()
+        password = bcrypt.hashpw(self.form_data.password.encode('utf-8'), salt)
+        # user_info = await LoginModel(email=email, password=password).insert()
+        user_info = await LoginModel(password=password, role='admin').insert()
+        token = self.create_token()
+
+        self.operating_successfully(dict(user_info) | {'token': token})
 
 
 
+
+class LoginViewModel(BaseViewModel):
+
+    def __init__(self, form_data: LoginForm):
+        super().__init__(need_auth=False)
+
+        self.form_data = form_data
+
+    async def before(self):
+        try:
+            await self.login()
+        except TimeoutException as e:
+            self.request_timeout(str(e))
+
+    async def login(self):
+        user = await LoginModel.find_one(LoginModel.role=='admin')
+       
+        if not bcrypt.checkpw(self.form_data.password.encode('utf-8'), user.password.encode('utf-8')):
+            self.operating_failed('invalid password')
+        token = self.create_token()
+
+        self.operating_successfully(
+            {
+                'message': 'login successfully',
+                'token': token
+            } 
+        )
