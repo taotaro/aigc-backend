@@ -14,6 +14,7 @@ __all__ = (
     'GenderEnum',
     'StudentModel',
     'TitleEnum',
+    'LoginModel',
 )
 
 class GenderEnum(Enum):
@@ -101,3 +102,14 @@ class TeamModel(BaseDBModel):
             [('_id', HASHED)],
         ]
     
+
+class LoginModel(BaseDBModel):
+    role: str = Field(...)
+    password: str = Field(...)
+
+    class Settings:
+        name = 'login'
+        strict = False
+        indexes = [
+            [('_id', HASHED)],
+        ]

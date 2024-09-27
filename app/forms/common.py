@@ -9,6 +9,8 @@ from app.models.common import TitleEnum
 __all__ = (
     'RegistrationForm',
     'LogErrorForm',
+    'RegisterPassword',
+    'LoginForm',
 )
 
 
@@ -28,3 +30,11 @@ class RegistrationForm(_BaseModel):
 
 class LogErrorForm(_BaseModel):
     error: object = _Body(..., embed=True)
+
+
+class RegisterPassword(_BaseModel):
+    # email: str = _Body(..., embed=True)
+    password: str = _Body(..., embed=True)
+
+class LoginForm(_BaseModel):
+    password: str = _Body(..., embed=True)

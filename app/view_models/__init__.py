@@ -8,13 +8,16 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from smtplib import SMTPException, SMTP_SSL
 from typing import Union
+import jwt
 
 from fastapi import Request
 
 from app.config import get_settings
 from app.libs.constants import ResponseStatusCodeEnum, get_response_message
 # from app.libs.custom import cus_print
-from app.models.common import TeacherModel
+from app.models.common import TeacherModel, LoginModel
+from jwt import ExpiredSignatureError, DecodeError
+
 
 __all__ = (
     'ViewModelException',
@@ -79,6 +82,7 @@ class BaseViewModel:
     async def __extract_token(self):
         if self.need_auth:
             self.token = self.request.headers.get('Authorization', '')
+            print('checking token: ', self.token)
             await self.check_token()
             if not self.user_info:
                 self.not_found('invalid token')
@@ -236,5 +240,44 @@ class BaseViewModel:
 
     def __getitem__(self, item):
         return getattr(self, item)
+
+    @staticmethod
+    def create_token():
+        payload = {
+            "exp": int(time.time()) + 60 * 15 # 15 mins
+        }
+        cookie_key = get_settings().COOKIE_KEY
+        token = jwt.encode(payload, cookie_key, algorithm='HS256')
+        return token
+
+    async def check_token(self) -> dict:
+        if not self.token:
+            self.unauthorized('Please pass the token in the authorization header to proceed')
+        _, self.token = self.token.split(' ')
+        print('toke: ', self.token)
+        self.user_info = self.verify_token()
+        # print(self.user_info)
+        # if self.user_info.get('title') == 'admin':
+        #     self.user_instance = await LoginModel.find_one(LoginModel.email == self.user_info.get('email'))
+        # else:
+        #     print('invalid token 2')
+        #     self.unauthorized('invalid token')
+        # if not self.user_instance:
+        #     self.not_found('no user found')
+
+    def verify_token(self) -> dict:
+        print('verifying token: ', self.token)
+        try:
+            jwt_verify_result = jwt.decode(self.token, get_settings().COOKIE_KEY, algorithms=['HS256']) or {}
+            print(jwt_verify_result)
+            if not jwt_verify_result:
+                self.unauthorized('please pass the token in the authorization header to proceed')
+            return jwt_verify_result
+        except ExpiredSignatureError:
+            print('token expired')
+            self.unauthorized('token expired. Please login again to continue')
+        except DecodeError:
+            print('invalid token')
+            self.unauthorized('invalid token')
 
 
