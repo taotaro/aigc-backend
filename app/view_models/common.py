@@ -22,6 +22,7 @@ __all__ = (
     'AllDataViewModel',
     'LoginViewModel',
     'RegisterEmailViewModel',
+    'BatchSendEmailModel'
 )
 
 
@@ -232,3 +233,38 @@ class LoginViewModel(BaseViewModel):
                 'token': token
             } 
         )
+
+class BatchSendEmailModel(BaseViewModel):
+    def __init__(self):
+        super().__init__(need_auth=False)
+
+    async def before(self):
+        try:
+            await self.batch_send()
+        except TimeoutException as e:
+            self.request_timeout(str(e))
+
+    async def batch_send(self):
+        all_data = await TeacherModel.find_all().to_list()
+        for item in all_data:
+            # print(item.email)
+            email_body = render_template('registration_email.html', {
+            'email': item.email,
+            'teacher_name_chinese': item.name_chinese,
+            'teacher_name_english': item.name_english,
+            'school_name_chinese': item.school_name_chinese,
+            'school_name_english': item.school_name_english,
+            'mobile_phone': item.mobile_phone,
+            'telephone': item.telephone,
+            # 'info': self.form_data.team_info,
+            'info': item.teams
+        })
+            email_status = self.send_email(
+                get_settings().MAIL_USERNAME,
+                item.email,
+                email_body,
+                '雲遊通義 – 阿里雲香港AI比賽報名完成'
+            )
+            print('email sent: ', item.email, email_status)
+
+        self.operating_successfully('batch emails sent')
