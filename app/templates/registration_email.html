@@ -89,15 +89,19 @@
             .team-info {
                 margin: 20px 0;
                 display: flex;
+                flex-direction: row;
+                /* display: none; */
                 flex-wrap: wrap;
-                background-color: #ffffff !important;
+                overflow-x: auto;
             }
             .team-table {
                 width: 48%;
                 margin: 1%;
                 border-collapse: collapse;
                 background-color: #f9f9f9;
+                box-sizing: border-box;
             }
+
             .team-table th,
             .team-table td {
                 border: 1px solid #ddd;
