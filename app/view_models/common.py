@@ -16,13 +16,16 @@ from motor.motor_asyncio import AsyncIOMotorClient
 import msoffcrypto
 from fastapi.responses import StreamingResponse
 from datetime import datetime
+import re
 
 __all__ = (
     'RegistrationViewModel',
     'AllDataViewModel',
     'LoginViewModel',
     'RegisterEmailViewModel',
-    'BatchSendEmailModel'
+    'BatchSendEmailModel',
+    'BatchSendWorkshopEmailModel',
+    'AddDataToDatabaseViewModel',
 )
 
 
@@ -245,7 +248,8 @@ class BatchSendEmailModel(BaseViewModel):
             self.request_timeout(str(e))
 
     async def batch_send(self):
-        all_data = await TeacherModel.find_all().to_list()
+        # all_data = await TeacherModel.find_all().to_list()
+        all_data = await TeacherModel.find(TeacherModel.email=="yiuchung@jfk.edu.hk").to_list()
         for item in all_data:
             # print(item.email)
             email_body = render_template('registration_email.html', {
@@ -262,9 +266,168 @@ class BatchSendEmailModel(BaseViewModel):
             email_status = self.send_email(
                 get_settings().MAIL_USERNAME,
                 item.email,
+                # 'kgb@materia-logic.com',
                 email_body,
                 '雲遊通義 – 阿里雲香港AI比賽報名完成'
             )
             print('email sent: ', item.email, email_status)
 
         self.operating_successfully('batch emails sent')
+
+
+class BatchSendWorkshopEmailModel(BaseViewModel):
+    def __init__(self, csv_data):
+        super().__init__(need_auth=False)
+        self.csv_data = csv_data
+
+    async def before(self):
+        try:
+            await self.batch_send()
+        except TimeoutException as e:
+            self.request_timeout(str(e))
+
+    async def batch_send(self):
+        # print(self.csv_data)
+        for item in self.csv_data.values:
+            print(item)
+            school_name = item[0]
+            created_at = item[1]
+            submitter = item[2]
+            name = item[3]
+            email = item[4]
+            number = item[5]
+            participants_9th = item[6]
+            pariticipants_14th = item[7]
+
+            email_body = render_template('workshop_email.html', {
+                'school_name': school_name,
+                'teacher_name': name,
+                'teacher_email': email,
+                'teacher_mobile': number,
+                'participants_1': participants_9th,
+                'participants_2': pariticipants_14th
+            })
+            email_status = self.send_email(
+                get_settings().MAIL_USERNAME,
+                # 'kgb@materia-logic.com',
+                email,
+                email_body,
+                '雲遊通義 – 阿里雲香港AI比賽線上工作坊報名完成'
+            )
+        # email_status = self.send_email(
+        #         get_settings().MAIL_USERNAME,
+        #         'kgb@materia-logic.com',
+        #         email_body,
+        #         '雲遊通義 – 阿里雲香港AI比賽報名完成'
+        # )
+
+
+
+class AddDataToDatabaseViewModel(BaseViewModel):
+    def __init__(self):
+        super().__init__(need_auth=False)
+
+    async def before(self):
+        try:
+            await self.format_data_for_insertion()
+        except TimeoutException as e:
+            self.request_timeout(str(e))
+
+    def extract_team_number(self, team):
+            return int(re.search(r'\d+', team).group())
+
+    async def format_data_for_insertion(self):
+    # Load the Excel file into a DataFrame
+        data = pd.read_excel('data.xlsx')
+
+        
+
+    # Group the data by team and teacher for easier manipulation
+        grouped_data = data.groupby(['Email', 'Team Number']).apply(lambda x: {
+        'team_name': x['Team Number'].iloc[0],
+        'school_group': x['School Group'].iloc[0],
+        'team_members': [{
+            'name_chinese': row['Student Name'],
+            'grade': row['Grade'],
+        } for _, row in x.iterrows()],
+        }).reset_index()
+
+        grouped_data['team_name_numeric'] = grouped_data['Team Number'].apply(self.extract_team_number)
+        grouped_data = grouped_data.sort_values('team_name_numeric')
+
+    # Structure data for each teacher
+        teacher_data = data.groupby('Email').apply(lambda x: {
+        'email': x['Email'].iloc[0],
+        'name_english': x['Teacher Name'].iloc[0],
+        'name_chinese': x['Teacher Name CN'].iloc[0],
+        'school_name_english': x['School Name'].iloc[0],
+        'school_name_chinese': x['School Name CN'].iloc[0],
+        'mobile_phone': x['Telephone'].iloc[0],
+        'telephone': x['School Phone'].iloc[0],
+        'teams': grouped_data[grouped_data['Email'] == x['Email'].iloc[0]][0].tolist()
+        }).tolist()
+
+        # return teacher_data
+        print(teacher_data)
+        for teacher in teacher_data:
+            all_team_info = []
+            for team in teacher['teams']:
+                team_member_info = []
+                for member in team['team_members']:
+                    student_info = await StudentModel(
+                        name_chinese=member['name_chinese'],
+                        grade=member['grade'],
+                    teacher_email=teacher['email']
+                    ).insert()
+                    team_member_info.append(student_info)
+                secret_code = str(secrets.randbelow(10**12)).zfill(12)
+
+                team_info = await TeamModel(
+                    name=team['team_name'],
+                    members=team_member_info,
+                    school_group=team['school_group'],
+                    teacher_email=teacher['email'],
+                    secret_code=secret_code
+                ).insert()
+            
+            
+                all_team_info.append({
+                    'team_name': team['team_name'],
+                    'school_group': team['school_group'],
+                    'members': team_member_info,
+                    'secret_code': secret_code
+                })
+
+            teacher_info = await TeacherModel(
+                email=teacher['email'],
+                name_english=teacher['name_english'],
+                name_chinese=teacher['name_chinese'],
+                school_name_english=teacher['school_name_english'],
+                school_name_chinese=teacher['school_name_chinese'],
+                mobile_phone=str(teacher['mobile_phone']),
+                telephone=str(teacher['telephone']),
+                title='Ms.',  # Assuming title is hardcoded, update if necessary
+                teams=all_team_info
+            ).insert()
+
+            email_body = render_template('registration_email.html', {
+            'email': teacher['email'],
+            'teacher_name_chinese':teacher['name_english'] ,
+            'teacher_name_english':teacher['name_chinese'],
+            'school_name_english': teacher['school_name_english'],
+            'school_name_chinese': teacher['school_name_chinese'],
+            'mobile_phone': teacher['mobile_phone'],
+            'telephone': teacher['telephone'],
+            # 'info': self.form_data.team_info,
+            'info': all_team_info
+            })
+
+            email_status = self.send_email(
+            get_settings().MAIL_USERNAME,
+            # 'kgb@materia-logic.com',
+            teacher['email'],
+            email_body,
+            '雲遊通義 – 阿里雲香港AI比賽報名完成'
+            )
+            print('email sent: ', email_status)
+       

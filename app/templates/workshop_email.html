@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="color-scheme" content="light dark" />
+        <meta name="supported-color-schemes" content="light dark" />
+        <title>團隊註冊成功</title>
+        <style>
+            @media (prefers-color-scheme: dark) {
+                .footer {
+                    background-color: #000000 !important;
+                }
+                p {
+                    color: #ffffff !important;
+                }
+            }
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #ffffff !important;
+                margin: 0;
+                padding: 0;
+                color: #333;
+            }
+            .container {
+                max-width: 600px;
+                margin: 20px auto;
+                background-color: #ffffff !important;
+                padding: 0;
+                border-radius: 8px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                overflow: hidden;
+            }
+            .header {
+                text-align: center;
+                padding: 10px;
+                background-color: #ffffff !important;
+            }
+            .header img {
+                width: 50%;
+                max-width: 100px;
+                height: auto;
+            }
+            .banner {
+                width: 100%;
+                height: auto;
+            }
+            .content {
+                padding: 20px;
+                background-color: #ffffff !important;
+            }
+            .content-no-padding {
+                padding: 0;
+                background-color: #ffffff !important;
+            }
+            .content h1 {
+                font-size: 24px;
+                color: #ff6a00;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+            .content h2 {
+                font-size: 18px;
+                font-weight: bold;
+                margin-bottom: 20px;
+                color: #333 !important;
+            }
+            .icon-text-wrapper {
+                display: flex;
+                align-items: flex-start;
+                margin-bottom: 15px;
+            }
+            .icon {
+                flex: 0 0 20px;
+                margin-right: 10px;
+            }
+            .icon img {
+                width: 20px;
+                height: 20px;
+            }
+            .text {
+                flex: 1;
+                color: black;
+            }
+            .content p {
+                margin: 15px 0;
+                color: black;
+            }
+            .team-info {
+                margin: 20px 0;
+                display: flex;
+                flex-direction: row;
+                /* display: none; */
+                flex-wrap: wrap;
+                overflow-x: auto;
+            }
+            .team-table {
+                width: 48%;
+                margin: 1%;
+                border-collapse: collapse;
+                background-color: #f9f9f9;
+                box-sizing: border-box;
+            }
+
+            .team-table th,
+            .team-table td {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+            .team-table th {
+                background-color: #ff6a00;
+                color: white;
+                text-align: left;
+            }
+            .footer {
+                text-align: center;
+                margin-top: 30px;
+                font-size: 14px;
+                color: #888;
+            }
+            .footer a {
+                color: #888;
+                text-decoration: none;
+            }
+            .sponsors {
+                text-align: center;
+                padding: 20px;
+                margin-top: 30px;
+                background-color: #ffffff !important;
+            }
+            .sponsors img {
+                margin: 10px;
+                width: 50%; /* Adjust logo size based on screen width */
+                max-width: 200px; /* Ensure the logo doesn't get too big */
+                height: auto;
+            }
+            .sponsors h2 {
+                margin-bottom: 10px;
+                font-size: 18px;
+                color: #333;
+            }
+            .section-title {
+                color: #ff6a00;
+                font-size: 20px;
+                font-weight: bold;
+                margin-top: 30px;
+                margin-bottom: 20px;
+            }
+            .img1 {
+                width: 200px;
+                min-height: 150px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>雲遊通義 –</h1>
+                <h1>阿里雲香港10週年校際生成式AI比賽</h1>
+            </div>
+            <img
+                src="https://cri-jh0uqm2iyt2q8ku4-registry.oss-cn-hongkong.aliyuncs.com/index-bg.jpeg"
+                alt="橫幅圖片"
+                class="banner"
+            />
+            <div class="content">
+                <h1>謝謝你報名參加「應用實踐線上工作坊」</h1>
+                <h2>你提交的報名資料如下：</h2>
+                <div class="icon-text-wrapper">
+                    <div class="text">
+                        學校名稱： {{data.school_name}} <br />
+                        聯絡老師姓名： {{data.teacher_name}}<br />
+                        聯絡老師手機號碼： {{data.teacher_mobile}}<br />
+                        聯絡老師電子郵箱： {{data.teacher_email}}<br />
+                        參與Oct 9 3:30pm-5pm 工作坊人數：
+                        {{data.participants_1}}<br />
+                        參與Oct 14 3:30pm-5pm 工作坊人數：
+                        {{data.participants_2}}<br />
+                    </div>
+                </div>
+                <div class="icon-text-wrapper">
+                    <div class="text">
+                        屆時請透過以下連結參與工作坊：<br />
+                        Oct 9 (Wed) 應用實踐線上工作坊 -
+                        <a href="https://bit.ly/3zLq6So" style="color: #ff6a00"
+                            >https://bit.ly/3zLq6So</a
+                        >
+                        <br />
+                        Oct 14 (Mon) 應用實踐線上工作坊 -
+                        <a href="https://bit.ly/3zOM7Q6" style="color: #ff6a00"
+                            >https://bit.ly/3zOM7Q6</a
+                        >
+                    </div>
+                </div>
+                <div class="section-title">期待你的參與！</div>
+                <div class="section-title">活動查詢及聯絡</div>
+                <div class="content-no-padding">
+                    <p>
+                        如有任何活動問題，歡迎聯絡 Gamenoodlesoup(
+                        <a
+                            href="mailto:edu@gamenoodlesoup.com"
+                            style="color: #ff6a00"
+                        >
+                            edu@gamenoodlesoup.com</a
+                        >/ 30011280)
+                    </p>
+                    <p>
+                        參賽者必須同意在參與活動時遵守活動條款及細則，詳情請
+                        <a
+                            href="https://aigc-portal-dev.materia-logic.com/terms"
+                            target="_blank"
+                            style="color: #ff6a00"
+                            >按此</a
+                        >查閱。
+                    </p>
+                    <p>
+                        是次活動所收集的資料只用作活動登記、通訊及相關用途，並只限Alibaba
+                        Cloud及其授權之服務承辦商存取。登記者有權要求查閱、更正或刪除其個人資料。如有查詢，與我們聯絡。有關詳情亦可瀏覽
+                        <a
+                            href="https://www.alibabacloud.com/help/tc/legal/latest/alibaba-cloud-international-website-privacy-policy"
+                            target="_blank"
+                            style="color: #ff6a00"
+                        >
+                            Alibaba Cloud的私隱政策</a
+                        >、通義平台的
+                        <a
+                            href="https://terms.alicdn.com/legal-agreement/terms/c_end_product_protocol/20231011201348415/20231011201348415.html"
+                            target="_blank"
+                            style="color: #ff6a00"
+                        >
+                            用戶協議</a
+                        >和<a
+                            href="https://terms.alicdn.com/legal-agreement/terms/privacy_policy_full/20231011201849846/20231011201849846.html"
+                            target="_blank"
+                            style="color: #ff6a00"
+                        >
+                            私隱政策</a
+                        >。
+                    </p>
+                </div>
+                <img
+                    src="https://cri-jh0uqm2iyt2q8ku4-registry.oss-cn-hongkong.aliyuncs.com/email-logo-v2.jpeg"
+                    alt="橫幅圖片"
+                    class="banner"
+                />
+            </div>
+        </div>
+    </body>
+</html>
