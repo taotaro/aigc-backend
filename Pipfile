@@ -28,6 +28,7 @@ email-validator = "*"
 pdfkit = "*"
 openpyxl = "*"
 msoffcrypto-tool = "*"
+python-multipart = "*"
 
 [dev-packages]
 
