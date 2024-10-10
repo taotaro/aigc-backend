@@ -1,4 +1,6 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, File, UploadFile, Query
+import pandas as pd
+from io import StringIO
 from fastapi.responses import StreamingResponse
 
 from app.forms.common import *
@@ -50,7 +52,22 @@ async def batch_send():
     async with BatchSendEmailModel() as response:
         return response
 
+@router.post('/batch-send-email-workshop')
+async def batch_send(
+    file: UploadFile = File(...), 
+    from_row: int = Query(..., description="Starting row number (inclusive)"),
+    to_row: int = Query(..., description="Ending row number (inclusive)")):
+    content = await file.read()
+    csv_data = pd.read_csv(StringIO(content.decode('utf-8')))
+    filtered_data = csv_data.iloc[from_row-2:to_row-1]
+    # print('csv_data: ', csv_data)
+    async with BatchSendWorkshopEmailModel(filtered_data) as response:
+        return response
 
+@router.post('/add-data')
+async def add_data():
+    async with AddDataToDatabaseViewModel() as response:
+        return response
 
 
 
