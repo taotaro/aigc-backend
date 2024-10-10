@@ -238,8 +238,9 @@ class LoginViewModel(BaseViewModel):
         )
 
 class BatchSendEmailModel(BaseViewModel):
-    def __init__(self):
+    def __init__(self, email):
         super().__init__(need_auth=False)
+        self.email = email
 
     async def before(self):
         try:
@@ -249,7 +250,7 @@ class BatchSendEmailModel(BaseViewModel):
 
     async def batch_send(self):
         # all_data = await TeacherModel.find_all().to_list()
-        all_data = await TeacherModel.find(TeacherModel.email=="yiuchung@jfk.edu.hk").to_list()
+        all_data = await TeacherModel.find(TeacherModel.email==self.email).to_list()
         for item in all_data:
             # print(item.email)
             email_body = render_template('registration_email.html', {

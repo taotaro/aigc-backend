@@ -47,8 +47,8 @@ async def login(form_data: LoginForm):
         return response
 
 
-@router.get('/batch-send-email')
-async def batch_send():
+@router.post('/batch-send-email')
+async def batch_send(email: str = Query(..., description="email address")):
     async with BatchSendEmailModel() as response:
         return response
 
