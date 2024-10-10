@@ -310,8 +310,8 @@ class BatchSendWorkshopEmailModel(BaseViewModel):
             })
             email_status = self.send_email(
                 get_settings().MAIL_USERNAME,
-                'kgb@materia-logic.com',
-                # email,
+                # 'kgb@materia-logic.com',
+                email,
                 email_body,
                 '雲遊通義 – 阿里雲香港AI比賽線上工作坊報名完成'
             )
