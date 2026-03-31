@@ -128,6 +128,14 @@ jobs:
           region-id: ${{ secrets.ALICLOUD_REGION_ID }}
           instance-id: ${{ secrets.ACR_INSTANCE_ID }}
 
+      # 加载构建参数（如 Dockerfile ARG 所需的 API Key、URL 等）
+      # 在 GitHub Environment 中设置 BUILD_ARGS 变量（JSON 格式），自动转为 CONFIG_MAP_* 环境变量
+      - name: Load build arguments
+        if: ${{ vars.BUILD_ARGS != '' }}
+        env:
+          BUILD_ARGS_JSON: ${{ vars.BUILD_ARGS }}
+        run: echo "${BUILD_ARGS_JSON}" | jq -r 'to_entries[] | "CONFIG_MAP_\(.key)=\(.value)"' >> "$GITHUB_ENV"
+
       # 编译并提交镜像到 ACR
       - name: Build and Push Docker Image To ACR
         uses: taotaro/actions-toolkit@build-image-to-acr
@@ -175,12 +183,16 @@ jobs:
           PRODUCTION_LIMIT_MEMORY="${PRODUCTION_LIMIT_MEMORY:-2Gi}"
           PRODUCTION_HPA_MIN_REPLICAS="${PRODUCTION_HPA_MIN_REPLICAS:-2}"
           PRODUCTION_HPA_MAX_REPLICAS="${PRODUCTION_HPA_MAX_REPLICAS:-4}"
-          if [ "${DEPLOY_OVERLAY}" = "production" ]; then
-            NODE_ENV="${NODE_ENV:-prod}"
+          if [ "${ENV_NAME}" = "prod" ]; then
+            NODE_ENV="${NODE_ENV:-prd}"
           else
             NODE_ENV="${NODE_ENV:-non-prd}"
           fi
-          K8S_APP_NAME="${CUSTOMER_NAME}-${PRODUCT_NAME}-${MODULE_NAME}-${ENV_NAME}"
+          APP_ENV="${ENV_NAME}"
+          case "${APP_ENV}" in
+            preview) APP_ENV="uat" ;;
+          esac
+          K8S_APP_NAME="${CUSTOMER_NAME}-${PRODUCT_NAME}-${MODULE_NAME}-${APP_ENV}"
           NS_ENV="${ENV_NAME}"
           case "${NS_ENV}" in
             prod) NS_ENV="prd" ;;
