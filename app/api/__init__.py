@@ -17,3 +17,7 @@ async def test_api():
 @router.get("/test")
 async def test_api_for_deployment():
     return 'API is working (test)'
+
+@router.get("/status")
+async def health_check():
+    return {"status": "ok"}
