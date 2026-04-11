@@ -175,8 +175,8 @@ jobs:
           PRODUCTION_LIMIT_MEMORY="${PRODUCTION_LIMIT_MEMORY:-2Gi}"
           PRODUCTION_HPA_MIN_REPLICAS="${PRODUCTION_HPA_MIN_REPLICAS:-2}"
           PRODUCTION_HPA_MAX_REPLICAS="${PRODUCTION_HPA_MAX_REPLICAS:-4}"
-          if [ "${DEPLOY_OVERLAY}" = "production" ]; then
-            NODE_ENV="${NODE_ENV:-prod}"
+          if [ "${ENV_NAME}" = "prod" ]; then
+            NODE_ENV="${NODE_ENV:-prd}"
           else
             NODE_ENV="${NODE_ENV:-non-prd}"
           fi
